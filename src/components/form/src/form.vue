@@ -1,0 +1,428 @@
+<template>
+  <section class="ui-component">
+    <el-form ref="uiFormRef" :model="params" v-bind="formProps" :rules="rules">
+      <ui-grid v-bind="gridPropsRef" :style="gridStyle">
+        <template v-for="(item, index) in useLabels" :key="item.key + index">
+          <template v-if="item._visible">
+            <ui-grid-item v-bind="item.gridProps">
+              <el-form-item
+                class="ui-form-item"
+                :class="[
+                  { hiddenLabel: Number(item.formItemProps?.labelWidth) === 0 }
+                ]"
+                :label="item.label"
+                :prop="item.key"
+                v-bind="item.formItemProps"
+              >
+                <!-- slot title -->
+                <template #label>
+                  <slot
+                    v-if="item.label"
+                    :name="`label-${item.key}`"
+                    :label="item.label"
+                    :props="item.props"
+                  >
+                    <span
+                      >{{ item.label
+                      }}{{ formProps['label-suffix'] ?? ':' }}</span
+                    >
+                  </slot>
+                </template>
+
+                <!-- slot form-item-content -->
+                <template v-if="item.type === 'slot'">
+                  <slot :name="item.slotName || item.key" :item="item">
+                    <template v-if="item.key === '_operate'">
+                      <UiGroupBtn
+                        class="table-group-btn"
+                        :data="uBtns"
+                        v-bind="options.groupBtn"
+                        @click="(btn: BtnItem) => onClickGroupBtn(btn, item)"
+                      />
+                    </template>
+                  </slot>
+                </template>
+
+                <template v-else>
+                  <template
+                    v-if="
+                      !(
+                        labelOptions.relation[item.type] &&
+                        item.options &&
+                        item.options.length > 0
+                      )
+                    "
+                  >
+                    <component
+                      :is="`${itemPrefix}${item.type}`"
+                      v-model="params[item.key]"
+                      v-bind="item.props"
+                      @input="(val) => itemChange(val, item)"
+                      @change="
+                        (val) =>
+                          !['input'].includes(item.type) &&
+                          itemChange(val, item)
+                      "
+                    >
+                      <template v-if="item.props?.prefix" #prefix>
+                        {{ item.props.prefix }}
+                      </template>
+                      <template v-if="item.props?.suffix" #suffix>
+                        {{ item.props.suffix }}
+                      </template>
+                      <template v-if="item.props?.prepend" #prepend>
+                        {{ item.props.prepend }}
+                      </template>
+                      <template v-if="item.props?.append" #append>
+                        {{ item.props.append }}
+                      </template>
+                    </component>
+                  </template>
+                  <template v-else>
+                    <component
+                      :is="`${itemPrefix}${item.type}`"
+                      v-model="params[item.key]"
+                      v-bind="item.props"
+                      @change="(val) => itemChange(val, item)"
+                    >
+                      <template v-for="(child, ci) in item.options" :key="ci">
+                        <component
+                          :is="`${itemPrefix}${
+                            item.props?.child?.type ||
+                            labelOptions.relation[item.type]
+                          }`"
+                          v-bind="Object.assign(child, child.props || {})"
+                          :label="
+                            ['radio-group', 'checkbox-group'].includes(
+                              item.type
+                            )
+                              ? child.value
+                              : child.label
+                          "
+                        >
+                          <span v-html="child.label"></span>
+                        </component>
+                      </template>
+                    </component>
+                  </template>
+                </template>
+              </el-form-item>
+            </ui-grid-item>
+          </template>
+        </template>
+      </ui-grid>
+    </el-form>
+  </section>
+</template>
+<script lang="ts" setup>
+import {
+  computed,
+  ComputedRef,
+  CSSProperties,
+  inject,
+  ref,
+  Ref,
+  watch
+} from 'vue';
+import { set, get } from 'lodash-es';
+import { isArray, isFunction, isJsonString } from '../utils';
+import { UiGrid, UiGridItem } from '@/components/grid/src/index';
+import { useVModel } from '@vueuse/core';
+import { FormChangeOutput, FormProps, LabelItem, uiFormProps } from '../types';
+import { GridProps } from '@/components/grid/types';
+import { BtnItem, FormMode } from '@/typings/items';
+import PubSub from 'pubsub-js';
+
+const labelOptions = {
+  relation: {
+    table: 'table-column',
+    select: 'option',
+    'checkbox-group': 'checkbox',
+    'radio-group': 'radio-button'
+  }
+};
+
+const uiProps = defineProps(uiFormProps);
+
+const emits = defineEmits(['change', 'operate']);
+
+defineExpose({
+  resetFields,
+  validate,
+  validateField
+});
+
+const uiFormRef: Ref<any> = ref('uiFormRef');
+const itemPrefix = ref('el-');
+const params = ref<any>({});
+const useModel: Ref<any> = useVModel(uiProps, 'model', emits);
+const showlist = ref<LabelItem[]>([]);
+
+const formProps: ComputedRef<FormProps> = computed(() => {
+  return Object.assign(
+    {},
+    {
+      labelWidth: '100px'
+    },
+    uiProps.props
+  );
+});
+
+const uBtns = computed<LabelItem[]>(() => {
+  const btns = uiProps.btns || [];
+  return btns;
+});
+
+const useLabels = ref<LabelItem[]>([]);
+const rules: ComputedRef<any> = computed(() => {
+  const useRules = {} as any;
+  useLabels.value.map((label: FormMode) => {
+    let { required, ruleTrigger } = label.props.formItem || {};
+    useRules[label.key] = required
+      ? [
+          {
+            required: true,
+            message: `${label.label} 是必填项！`,
+            trigger: ruleTrigger ?? 'blur'
+          },
+          ...(label.props.rules || [])
+        ]
+      : label.props.rules || undefined;
+  });
+  Object.assign(useRules, formProps.value.rules || {});
+  return useRules;
+});
+watch(
+  () => uiProps.model,
+  async () => {
+    await Promise.resolve().then();
+    batchShow();
+    setValue(params.value, uiProps.model, uiProps.labels);
+    Object.keys(params.value).map((key: string) => {
+      const label = (useLabels.value.find(
+        (item: LabelItem) => item.key === key
+      ) || {}) as LabelItem;
+      // 清除插槽的校验
+      if (
+        label.type === 'slot' &&
+        params.value[key] &&
+        Object.keys(params.value[key]).length > 0
+      ) {
+        setTimeout(() => validateField(key), 4);
+      }
+    });
+  },
+  { immediate: true, deep: true }
+);
+
+watch(
+  () => uiProps.labels,
+  () => {
+    showlist.value = [];
+    useLabels.value = uiProps.labels.map((item: LabelItem) => {
+      setPlaceholder(item);
+      setProps(item);
+      const { hasShowFn } = itemShow(item);
+      hasShowFn && showlist.value.push(item);
+      return item;
+    });
+  },
+  { immediate: true }
+);
+
+function setValue(ari: any, data: any, labels: LabelItem[]) {
+  labels.map((label: any) => {
+    let uKey = label.key;
+    if (isJsonString(uKey)) {
+      if (!ari[uKey]) ari[uKey] = [];
+      JSON.parse(uKey)?.map((key: string) => {
+        get(data, key) && ari[uKey].push(get(data, key));
+      });
+    } else {
+      ari[uKey] = get(data, uKey);
+    }
+  });
+}
+
+function setProps(item: LabelItem) {
+  // grid item
+  item.gridProps = Object.assign(
+    {},
+    uiProps.options.gridItem || {
+      span: 12
+    },
+    item.props?.gridItem || {}
+  );
+
+  // formItemProps
+  item.formItemProps = item.props?.formItem || {};
+
+  return item;
+}
+
+function setPlaceholder(item: LabelItem) {
+  let placeholder = item.props?.placeholder;
+  if (!placeholder) {
+    switch (true) {
+      case ['input'].includes(String(item.type)):
+        placeholder = '请输入';
+        break;
+      default:
+        placeholder = '请选择';
+        break;
+    }
+    set(item, 'props.placeholder', placeholder + item.label);
+  }
+}
+
+// grid
+const gridPropsRef = computed<GridProps>(
+  () =>
+    uiProps.options.grid || {
+      xGap: 10,
+      yGap: 5
+    }
+);
+
+const gridStyle = computed<CSSProperties>(() => {
+  return Object.assign(
+    {
+      alignItems: 'center'
+    },
+    gridPropsRef.value.style || {}
+  ) as CSSProperties;
+});
+
+/**
+ * 显示隐藏
+ */
+function itemShow(item: LabelItem) {
+  let visible = true;
+  let hasShowFn = false;
+
+  switch (true) {
+    case isFunction(item.show):
+      visible = (item.show as any)(useModel.value, item);
+      hasShowFn = true;
+      break;
+    default:
+      visible = item.show !== false;
+      break;
+  }
+
+  if (!visible) {
+    useModel.value[item.key] = '';
+  }
+  item._visible = visible;
+
+  return {
+    hasShowFn
+  };
+}
+
+/**
+ * item 值变化
+ */
+function itemChange(value: any, item: LabelItem) {
+  let useValue = value?.target ? value.target.value : value;
+  useValue = ['false', 'true'].includes(useValue)
+    ? JSON.parse(useValue)
+    : useValue;
+  delete useModel.value[item.key];
+
+  const uKey = item.key;
+  if (isJsonString(uKey)) {
+    JSON.parse(uKey)?.map((o: string, i: number) => {
+      let iv = useValue;
+      if (isArray(useValue)) {
+        iv = useValue[i];
+      }
+      set(useModel.value, o, iv);
+    });
+  } else {
+    set(useModel.value, item.key, useValue);
+  }
+
+  if (isFunction(item.change)) {
+    (item.change as any)(useValue, useModel.value, item);
+  }
+  batchShow();
+  const result: FormChangeOutput = {
+    params: useModel.value,
+    key: item.key,
+    value: useValue
+  };
+  emits('change', result);
+}
+
+function batchShow() {
+  showlist.value.map((i: LabelItem) => {
+    const useItem = useLabels.value.find((l: LabelItem) => l.key === i.key);
+    useItem && itemShow(useItem);
+  });
+}
+
+function validateField(key: string, callback?: any) {
+  return uiFormRef.value.validateField(key, callback);
+}
+
+function resetFields() {
+  uiFormRef.value.resetFields();
+  Object.assign(useModel.value, params.value) as any;
+}
+
+function validate() {
+  return uiFormRef.value.validate();
+}
+
+function onClickGroupBtn(item: BtnItem, label: LabelItem) {
+  const tParams = { item, label };
+  emits('operate', tParams);
+}
+</script>
+<style lang="scss" scoped>
+.ui-component {
+  .el-form {
+    &.el-form--label-left {
+      .el-form-item__label {
+        justify-content: flex-start;
+      }
+    }
+
+    &.el-form--label-top {
+      .el-form-item__label {
+        justify-content: flex-start;
+      }
+    }
+
+    .el-form-item__label {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      line-height: 1.2;
+    }
+
+    .el-form-item {
+      width: 100%;
+
+      &.hiddenLabel {
+        .el-form-item__label {
+          display: none;
+        }
+      }
+    }
+
+    .el-radio-group {
+      line-height: 28px;
+
+      .el-radio {
+        height: 26px;
+        line-height: 24px;
+        padding: 0 6px;
+        margin-right: 12px;
+        margin-left: 0px;
+      }
+    }
+  }
+}
+</style>

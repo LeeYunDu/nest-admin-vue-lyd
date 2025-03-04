@@ -1,0 +1,541 @@
+{
+  "id": "4736650",
+  "name": "vue3-template",
+  "font_family": "iconfont-screen",
+  "css_prefix_text": "icon-screen-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "5558347",
+      "name": "移峰填谷",
+      "font_class": "yifengtiangu",
+      "unicode": "e600",
+      "unicode_decimal": 58880
+    },
+    {
+      "icon_id": "32332242",
+      "name": "冷库冷链",
+      "font_class": "lenglianku",
+      "unicode": "e624",
+      "unicode_decimal": 58916
+    },
+    {
+      "icon_id": "42917108",
+      "name": "当前增容",
+      "font_class": "dangqianzengrong1",
+      "unicode": "ea1f",
+      "unicode_decimal": 59935
+    },
+    {
+      "icon_id": "42907082",
+      "name": "商业",
+      "font_class": "shangye",
+      "unicode": "ea1c",
+      "unicode_decimal": 59932
+    },
+    {
+      "icon_id": "42907080",
+      "name": "其他",
+      "font_class": "qita",
+      "unicode": "ea1d",
+      "unicode_decimal": 59933
+    },
+    {
+      "icon_id": "42907081",
+      "name": "工业",
+      "font_class": "gongye",
+      "unicode": "ea1e",
+      "unicode_decimal": 59934
+    },
+    {
+      "icon_id": "42907083",
+      "name": "居民",
+      "font_class": "jumin",
+      "unicode": "ea1b",
+      "unicode_decimal": 59931
+    },
+    {
+      "icon_id": "42874822",
+      "name": "下降",
+      "font_class": "xiajiang1",
+      "unicode": "ea1a",
+      "unicode_decimal": 59930
+    },
+    {
+      "icon_id": "42855926",
+      "name": "当前增容",
+      "font_class": "dangqianzengrong",
+      "unicode": "ea13",
+      "unicode_decimal": 59923
+    },
+    {
+      "icon_id": "42855929",
+      "name": "电网侧储能-1",
+      "font_class": "dianwangcechuneng-1",
+      "unicode": "ea14",
+      "unicode_decimal": 59924
+    },
+    {
+      "icon_id": "42855927",
+      "name": "电网侧储能",
+      "font_class": "dianwangcechuneng1",
+      "unicode": "ea15",
+      "unicode_decimal": 59925
+    },
+    {
+      "icon_id": "42855931",
+      "name": "调节负荷",
+      "font_class": "tiaojiefuhe1",
+      "unicode": "ea16",
+      "unicode_decimal": 59926
+    },
+    {
+      "icon_id": "42855924",
+      "name": "参与线路",
+      "font_class": "canyuxianlu",
+      "unicode": "ea17",
+      "unicode_decimal": 59927
+    },
+    {
+      "icon_id": "42855928",
+      "name": "定位2",
+      "font_class": "dingwei2",
+      "unicode": "ea18",
+      "unicode_decimal": 59928
+    },
+    {
+      "icon_id": "42855923",
+      "name": "当日负荷曲线",
+      "font_class": "dangrifuhequxian",
+      "unicode": "ea19",
+      "unicode_decimal": 59929
+    },
+    {
+      "icon_id": "42855942",
+      "name": "线路",
+      "font_class": "xianlu",
+      "unicode": "ea06",
+      "unicode_decimal": 59910
+    },
+    {
+      "icon_id": "42855944",
+      "name": "正在调节",
+      "font_class": "zhengzaitiaojie",
+      "unicode": "ea07",
+      "unicode_decimal": 59911
+    },
+    {
+      "icon_id": "42855938",
+      "name": "历史有功",
+      "font_class": "lishiyougong1",
+      "unicode": "ea08",
+      "unicode_decimal": 59912
+    },
+    {
+      "icon_id": "42855937",
+      "name": "历史记录 1",
+      "font_class": "a-lishijilu1",
+      "unicode": "ea09",
+      "unicode_decimal": 59913
+    },
+    {
+      "icon_id": "42855941",
+      "name": "时间",
+      "font_class": "shijian",
+      "unicode": "ea0a",
+      "unicode_decimal": 59914
+    },
+    {
+      "icon_id": "42855936",
+      "name": "箭头2下",
+      "font_class": "jiantou2xia",
+      "unicode": "ea0b",
+      "unicode_decimal": 59915
+    },
+    {
+      "icon_id": "42855940",
+      "name": "区域可调能力",
+      "font_class": "quyuketiaonengli",
+      "unicode": "ea0c",
+      "unicode_decimal": 59916
+    },
+    {
+      "icon_id": "42855939",
+      "name": "列表 1",
+      "font_class": "a-liebiao1",
+      "unicode": "ea0d",
+      "unicode_decimal": 59917
+    },
+    {
+      "icon_id": "42855933",
+      "name": "箭头2上",
+      "font_class": "jiantou2shang",
+      "unicode": "ea0e",
+      "unicode_decimal": 59918
+    },
+    {
+      "icon_id": "42855935",
+      "name": "定位",
+      "font_class": "dingwei1",
+      "unicode": "ea0f",
+      "unicode_decimal": 59919
+    },
+    {
+      "icon_id": "42855930",
+      "name": "调节线路",
+      "font_class": "tiaojiexianlu",
+      "unicode": "ea10",
+      "unicode_decimal": 59920
+    },
+    {
+      "icon_id": "42855932",
+      "name": "调节区域",
+      "font_class": "tiaojiequyu",
+      "unicode": "ea11",
+      "unicode_decimal": 59921
+    },
+    {
+      "icon_id": "42855925",
+      "name": "调节目标",
+      "font_class": "tiaojiemubiao",
+      "unicode": "ea12",
+      "unicode_decimal": 59922
+    },
+    {
+      "icon_id": "42855949",
+      "name": "微网群",
+      "font_class": "weiwangqun1",
+      "unicode": "ea00",
+      "unicode_decimal": 59904
+    },
+    {
+      "icon_id": "42855947",
+      "name": "起始时间",
+      "font_class": "qishishijian",
+      "unicode": "ea01",
+      "unicode_decimal": 59905
+    },
+    {
+      "icon_id": "42855946",
+      "name": "卓阳储能",
+      "font_class": "zhuoyangchuneng",
+      "unicode": "ea02",
+      "unicode_decimal": 59906
+    },
+    {
+      "icon_id": "42855934",
+      "name": "箭头下",
+      "font_class": "jiantouxia",
+      "unicode": "ea03",
+      "unicode_decimal": 59907
+    },
+    {
+      "icon_id": "42855945",
+      "name": "双碳能源聚合商",
+      "font_class": "shuangtannengyuanjuheshang1",
+      "unicode": "ea04",
+      "unicode_decimal": 59908
+    },
+    {
+      "icon_id": "42855943",
+      "name": "终止时间",
+      "font_class": "zhongzhishijian",
+      "unicode": "ea05",
+      "unicode_decimal": 59909
+    },
+    {
+      "icon_id": "42855948",
+      "name": "新型负荷管理系统",
+      "font_class": "xinxingfuheguanlixitong1",
+      "unicode": "e9ff",
+      "unicode_decimal": 59903
+    },
+    {
+      "icon_id": "42753824",
+      "name": "右侧箭头",
+      "font_class": "youcejiantou",
+      "unicode": "e9fe",
+      "unicode_decimal": 59902
+    },
+    {
+      "icon_id": "42736476",
+      "name": "历史有功",
+      "font_class": "lishiyougong",
+      "unicode": "e9fa",
+      "unicode_decimal": 59898
+    },
+    {
+      "icon_id": "42736475",
+      "name": "下降",
+      "font_class": "xiajiang",
+      "unicode": "e9fb",
+      "unicode_decimal": 59899
+    },
+    {
+      "icon_id": "42736474",
+      "name": "左侧箭头",
+      "font_class": "zuocejiantou",
+      "unicode": "e9fc",
+      "unicode_decimal": 59900
+    },
+    {
+      "icon_id": "42736473",
+      "name": "箭头",
+      "font_class": "jiantou",
+      "unicode": "e9fd",
+      "unicode_decimal": 59901
+    },
+    {
+      "icon_id": "42736529",
+      "name": "下拉箭头",
+      "font_class": "xialajiantou",
+      "unicode": "e9f9",
+      "unicode_decimal": 59897
+    },
+    {
+      "icon_id": "42381273",
+      "name": "湿度",
+      "font_class": "shidu",
+      "unicode": "e9f7",
+      "unicode_decimal": 59895
+    },
+    {
+      "icon_id": "42381272",
+      "name": "温度",
+      "font_class": "wendu",
+      "unicode": "e9f8",
+      "unicode_decimal": 59896
+    },
+    {
+      "icon_id": "1004394",
+      "name": "三角",
+      "font_class": "sanjiao",
+      "unicode": "e60e",
+      "unicode_decimal": 58894
+    },
+    {
+      "icon_id": "41622743",
+      "name": "退出",
+      "font_class": "tuichu",
+      "unicode": "e9b9",
+      "unicode_decimal": 59833
+    },
+    {
+      "icon_id": "41622762",
+      "name": "导航",
+      "font_class": "daohang",
+      "unicode": "e9cc",
+      "unicode_decimal": 59852
+    },
+    {
+      "icon_id": "42370550",
+      "name": "太阳",
+      "font_class": "taiyang",
+      "unicode": "e9ec",
+      "unicode_decimal": 59884
+    },
+    {
+      "icon_id": "42370549",
+      "name": "当前负载率",
+      "font_class": "dangqianfuzaishuai",
+      "unicode": "e9ed",
+      "unicode_decimal": 59885
+    },
+    {
+      "icon_id": "42370541",
+      "name": "专变",
+      "font_class": "zhuanbian",
+      "unicode": "e9ee",
+      "unicode_decimal": 59886
+    },
+    {
+      "icon_id": "42370545",
+      "name": "总调节能力",
+      "font_class": "zongtiaojienengli",
+      "unicode": "e9ef",
+      "unicode_decimal": 59887
+    },
+    {
+      "icon_id": "42370544",
+      "name": "空调",
+      "font_class": "kongtiao",
+      "unicode": "e9f0",
+      "unicode_decimal": 59888
+    },
+    {
+      "icon_id": "42370543",
+      "name": "新型负荷管理系统",
+      "font_class": "xinxingfuheguanlixitong",
+      "unicode": "e9f1",
+      "unicode_decimal": 59889
+    },
+    {
+      "icon_id": "42370542",
+      "name": "资源池",
+      "font_class": "ziyuanchi",
+      "unicode": "e9f2",
+      "unicode_decimal": 59890
+    },
+    {
+      "icon_id": "42370540",
+      "name": "双碳能源聚合商",
+      "font_class": "shuangtannengyuanjuheshang",
+      "unicode": "e9f3",
+      "unicode_decimal": 59891
+    },
+    {
+      "icon_id": "42370539",
+      "name": "实时负荷",
+      "font_class": "shishifuhe",
+      "unicode": "e9f4",
+      "unicode_decimal": 59892
+    },
+    {
+      "icon_id": "42370537",
+      "name": "配电线路",
+      "font_class": "peidianxianlu",
+      "unicode": "e9f5",
+      "unicode_decimal": 59893
+    },
+    {
+      "icon_id": "42370538",
+      "name": "输电线路",
+      "font_class": "shudianxianlu",
+      "unicode": "e9f6",
+      "unicode_decimal": 59894
+    },
+    {
+      "icon_id": "42370564",
+      "name": "光伏",
+      "font_class": "guangfu",
+      "unicode": "e9de",
+      "unicode_decimal": 59870
+    },
+    {
+      "icon_id": "42370562",
+      "name": "公变",
+      "font_class": "gongbian",
+      "unicode": "e9df",
+      "unicode_decimal": 59871
+    },
+    {
+      "icon_id": "42370558",
+      "name": "变电站",
+      "font_class": "biandianzhan",
+      "unicode": "e9db",
+      "unicode_decimal": 59867
+    },
+    {
+      "icon_id": "42370561",
+      "name": "聚合商",
+      "font_class": "juheshang",
+      "unicode": "e9e0",
+      "unicode_decimal": 59872
+    },
+    {
+      "icon_id": "42370557",
+      "name": "电网规模",
+      "font_class": "dianwangguimo",
+      "unicode": "e9e1",
+      "unicode_decimal": 59873
+    },
+    {
+      "icon_id": "42370547",
+      "name": "中压用户",
+      "font_class": "zhongyayonghu",
+      "unicode": "e9d9",
+      "unicode_decimal": 59865
+    },
+    {
+      "icon_id": "42370560",
+      "name": "可调节企业",
+      "font_class": "ketiaojieqiye",
+      "unicode": "e9e2",
+      "unicode_decimal": 59874
+    },
+    {
+      "icon_id": "42370555",
+      "name": "最高负荷",
+      "font_class": "zuigaofuhe",
+      "unicode": "e9e3",
+      "unicode_decimal": 59875
+    },
+    {
+      "icon_id": "42370559",
+      "name": "定位",
+      "font_class": "dingwei",
+      "unicode": "e9e4",
+      "unicode_decimal": 59876
+    },
+    {
+      "icon_id": "42370554",
+      "name": "微网",
+      "font_class": "weiwang",
+      "unicode": "e9e5",
+      "unicode_decimal": 59877
+    },
+    {
+      "icon_id": "42370551",
+      "name": "低压用户",
+      "font_class": "diyayonghu",
+      "unicode": "e9e6",
+      "unicode_decimal": 59878
+    },
+    {
+      "icon_id": "42370556",
+      "name": "电网侧储能",
+      "font_class": "dianwangcechuneng",
+      "unicode": "e9e7",
+      "unicode_decimal": 59879
+    },
+    {
+      "icon_id": "42370553",
+      "name": "微网群",
+      "font_class": "weiwangqun",
+      "unicode": "e9e8",
+      "unicode_decimal": 59880
+    },
+    {
+      "icon_id": "42370552",
+      "name": "调节负荷",
+      "font_class": "tiaojiefuhe",
+      "unicode": "e9e9",
+      "unicode_decimal": 59881
+    },
+    {
+      "icon_id": "42370546",
+      "name": "充电桩",
+      "font_class": "chongdianzhuang",
+      "unicode": "e9ea",
+      "unicode_decimal": 59882
+    },
+    {
+      "icon_id": "42370548",
+      "name": "可调资源",
+      "font_class": "ketiaoziyuan",
+      "unicode": "e9eb",
+      "unicode_decimal": 59883
+    },
+    {
+      "icon_id": "42370566",
+      "name": "调节用户",
+      "font_class": "tiaojieyonghu",
+      "unicode": "e9dd",
+      "unicode_decimal": 59869
+    },
+    {
+      "icon_id": "42370563",
+      "name": "柴发",
+      "font_class": "chaifa",
+      "unicode": "e9da",
+      "unicode_decimal": 59866
+    },
+    {
+      "icon_id": "42370565",
+      "name": "储能",
+      "font_class": "chuneng",
+      "unicode": "e9dc",
+      "unicode_decimal": 59868
+    }
+  ]
+}

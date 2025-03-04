@@ -1,0 +1,131 @@
+@forward './theme/primary' as primary-*;
+@use './theme/title.scss';
+
+
+$colortitle:title.$extra;
+/** theme color */
+$primary-color-weight: #9ECCEE;
+$primary-color-light: #9ECCEE;
+/** base color */
+$white: #fff;
+$black: #000;
+$mark: #9ECCEE;
+$color-f5: #f5f5f5;
+$color-3: #333;
+$color-4: #444;
+$color-6: #666;
+$color-8: #888;
+$color-8-l: #87C7C6;
+$color-9: #999;
+$color-e0: #e0e0e0;
+$color-e1: #e1e1e1;
+$color-e: #eee;
+$color-f2: #F2F2F2;
+$color-f7: #F7F7F7;
+$color-sub: #01F7FF;
+$color-info-light: $color-8-l;
+$color-weight-light: #0DFFE0;
+$color-d4: #D4EAEA;
+$color-0a: #0A9B74;
+$color-3e: #3E5D59;
+$color-01: rgba(1, 255, 234, 0.20);
+
+/** primary page color */
+$primary-bg-body: #F2F2F6;
+$primary-bg-header: white;
+$primary-bg-aside: white;
+
+/** primary other color */
+$primary-color-header: #FFFFFF;
+$primary-color-label: #46D3BA;
+$primary-color-value: #FFFFFF;
+$primary-color-title: #FFFFFF;
+$primary-color-title-sub: #7CF9F6;
+$primary-color-title-extra: #FA663C;
+$primary-color-border: #aec3c3;
+$primary-color-icon: #7CF9F6;
+$primary-color-divider: rgba($color: #000, $alpha: 0.1);
+$primary-color-placeholder: #FEFFFF;
+$primary-color-btn: rgba(111, 166, 148, .5);
+$primary-color-btnContent: rgba(111, 166, 148, 1);
+$primary-color-mark: #FA8708;
+$primary-color-price: $primary-color-mark;
+$primary-color-breadcrumb: #666;
+$primary-color-description: #999;
+
+/** font size */
+$font-size-title-mini: 14px;
+$font-size-title-small: 16px;
+$font-size-title-middle: 18px;
+$font-size-title-large: 20px;
+
+/** border */
+$border-solid: 1px solid $primary-color-border;
+$border-dashed: 1px dashed $primary-color-border;
+$border-btn: 1px solid $primary-color-btn;
+
+/** padding */
+$padding-size-mini: 5px;
+$padding-size-small: 10px;
+$padding-size-middle: 15px;
+$padding-size-large: 20px;
+$padding-size-item: 12px;
+$padding-size-layout: 15px;
+
+/** margin */
+$margin-size-mini: 5px;
+$margin-size-small: 10px;
+$margin-size-middle: 15px;
+$margin-size-large: 20px;
+$margin-size-layout: 16px;
+
+/** border-radius */
+$border-radius-mini: 2px;
+$border-radius-small: 4px;
+$border-radius-middle: 6px;
+$border-radius-large: 8px;
+
+/** layout */
+$page-aside-width: 220px;
+$page-header-height: 80px;
+$page-breadcrumb-height: 52px;
+$page-side-width: 220px;
+$page-main-center-width: 1540px;
+$page-content-padding: $padding-size-middle;
+$page-layout-padding: 16px;
+$home-search-width: 700px;
+$theme-box-radius: 6px;
+
+/** box */
+$box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
+$theme-border: 1px solid $color-e0;
+
+/** style */
+$bg-item: linear-gradient(0deg, rgba(3, 54, 59, 0.71) 0%, rgba(3, 54, 59, 0.88) 99%);
+$bg-group: linear-gradient(0deg, rgba(3, 56, 59, 0.09) 0%, rgba(3, 54, 59, 0.88) 100%);
+
+// 1
+$title: (
+  "border": (
+    "color": (
+      "main": "#000"
+    )
+  ),
+);
+
+// 省略号
+@mixin ellipsisMultiline($number: 1) {
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  word-break: break-all;
+  text-overflow: ellipsis;
+  -webkit-line-clamp: $number;
+}
+
+
+$node-path: '/node-szzt';
+$file-id:'2164';
+@function metaFilePathScss($fileName) {
+  @return url(#{$node-path}/file/download/#{$file-id}/#{$fileName});
+}

@@ -1,0 +1,212 @@
+* {
+  margin: 0;
+  padding: 0;
+  border: none;
+  box-sizing: border-box;
+}
+
+// html{
+//   font-size: 16px!important;
+// }
+
+body {
+  background: $primary-bg-body;
+  font-size: 14px !important;
+  color: #666;
+}
+
+
+
+.theme-color {
+  color: $primary-color;
+}
+
+.title-color {
+  color: $primary-color-title;
+}
+
+.description-color {
+  color: $primary-color-description;
+}
+
+.info-color {
+  color: $primary-color-description;
+}
+
+.label-color {
+  color: $primary-color-label;
+}
+
+.value-color {
+  color: $primary-color-value;
+}
+
+.mark-color {
+  color: $primary-color-mark;
+}
+
+.el-menu {
+  .submenu-title,
+  .el-menu-item {
+    display: flex;
+    align-items: center;
+  }
+}
+
+
+.ui-component{
+  &.ui-table {
+    .el-table {
+      background-color: transparent !important;
+      border: none;
+      height: 100%;
+      thead{
+        background: linear-gradient( 90deg, #061C3F 0%, #1C3F73 50%, #061636 100%);
+
+      }
+      th.el-table__cell {
+        font-size: 16px;
+        font-family: Source Han Sans CN-Regular, Source Han Sans CN;
+        font-weight: 400;
+        color: #a5d5fb;
+        border: none;
+        padding: 7px 0;
+        background: transparent;
+        .cell {
+          // white-space: nowrap;
+        }
+      }
+      tr {
+        background-color: transparent;
+  
+        border: none;
+        background-repeat: no-repeat;
+        background-size: 100%;
+        td {
+          border: none;
+          // border-bottom: 1px dashed #5787ae;
+          font-size: 16px;
+          font-family: Source Han Sans CN-Regular, Source Han Sans CN;
+          font-weight: 400;
+          color: #ffffff;
+        }
+  
+        &:hover {
+          td {
+            background: transparent !important;
+          }
+        }
+      }
+  
+      .el-table__inner-wrapper {
+        &::before {
+          display: none;
+        }
+      }
+    }
+  
+  }
+  .el-pagination{
+    display: flex;
+    align-items: center;
+    .total {
+      position: absolute;
+      left: 0;
+      font-size: 14px;
+      font-weight: 400;
+      color: rgba(255, 255, 255, 1);
+    }
+    .p-total{
+      font-weight: 400;
+      color: rgba(255, 255, 255, 1);
+    }
+    .el-pagination__total{
+      color: white;
+    }
+    .el-pagination__goto,.el-pagination__classifier{
+      color: rgba(255, 255, 255, 1);
+  
+    }
+  
+    > button {
+      //border: 1px solid rgba(0, 0, 0, 0.15);
+      background-color: rgba(27, 73, 108, 1);
+      border-radius: 4px;
+      color: rgba(255, 255, 255, 1);
+    }
+  
+    .el-pager {
+      > li {
+        width: 30px;
+        height: 30px;
+        border: none;
+        background-color: rgba(27, 73, 108, 1);
+        color: rgba(255, 255, 255, 1);
+        font-weight: normal;
+        font-size: 14px;
+        border-radius: 3px;
+        margin-left: 10px;
+        &:last-child{
+          margin-right: 10px;
+        }
+        &:not(.disabled).active {
+          background-color: #0085EE;
+          border: none;
+          background: #0085EE;
+          color: rgba(255, 255, 255, 0.9);
+        }
+  
+        &:not(.disabled):hover {
+          background-color: #0085EE;
+          border: none;
+          color: rgba(255, 255, 255, 0.9);
+        }
+        &.is-active{
+          background-color: #0085EE;
+        }
+      }
+    }
+  }
+}
+
+
+
+.bg-button{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  background: url('@/assets/screen-img/button-bg.png') no-repeat center center;
+  background-size: 100% 100%;
+  min-width: 100px;
+  height: 35px;
+}
+
+
+.dialog-content{
+  ::v-deep(tbody) {
+      .type-name {
+        font-size: 18px;
+        color: #69f5ff !important;
+        font-family: 'Alibaba PuHuiTi' !important;
+        font-weight: 400 !important;
+        line-height: 56px !important;
+
+        .cell {
+          text-align: left;
+        }
+      }
+    }
+}
+
+.dispatch-tooltip355 {
+  background: transparent !important;
+  max-width: 355px;
+  border: 0px solid #69f5ff!important;
+}
+
+.dispatch-tooltip240 {
+  background: transparent !important;
+  max-width: 240px;
+  border: 0px solid #69f5ff !important;
+}
