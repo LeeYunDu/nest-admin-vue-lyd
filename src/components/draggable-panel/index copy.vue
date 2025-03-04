@@ -37,7 +37,6 @@
 <script>
 import Sortable from 'sortablejs';
 import { get } from 'lodash-es';
-import Vue from 'vue';
 import AttrsSetting from './attrsSetting/index.vue';
 import { componentLibray } from './config/component-config';
 // import { v4 as uuid } from 'uuid';

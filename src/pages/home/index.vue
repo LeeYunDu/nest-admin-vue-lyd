@@ -1,7 +1,7 @@
 <template>
-  <TemplateEditor />
+  <DraggablePanel />
 </template>
 
 <script lang="ts" setup>
-import TemplateEditor from '@/components/template-editor/index.vue'
+import DraggablePanel from '@/components/draggable-panel/index.vue'
 </script>
