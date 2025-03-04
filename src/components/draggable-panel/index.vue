@@ -250,15 +250,21 @@ const getComponentById = nodeId => {
 // 事件处理
 const addEventToDom = evt => {
   const clickHandler = e => {
-    console.log(evt.item.classList)
-
     if (activeComponent.value) {
       activeComponent.value.classList.remove('component-active')
     }
     activeComponent.value = evt.item
     activeComponentAttrs.value = getComponentById(evt.item.dataset.nodeId)
     evt.item.classList.add('component-active')
-    createMenuElement(evt)
+    // page没有操作菜单项
+    console.log(evt.item.dataset.nodeId,'evt.item.dataset.nodeId')
+
+    if(!(evt.item.dataset.nodeId == 'page')){
+      createMenuElement(evt)
+    }else{
+      const oldMenu = document.querySelector('.component-menu')
+      if (oldMenu) oldMenu.remove()
+    }
     e.stopPropagation()
   }
 
@@ -324,6 +330,8 @@ const handleMenuClick = (type, evt) => {
 
 const initDragFeedback = () => {
   const panel = panelContent.value
+  // addEventToDom(panel)
+  addEventToDom({ item: panel })
 
   panel.addEventListener('dragenter', e => {
     const container = findContainer(e.target)
@@ -386,7 +394,7 @@ onMounted(() => {
   .tree-panel {
     position: absolute;
     top: 0;
-    left: calc(100% + 0px);
+    left:100%;
     width: 250px;
     height: 100%;
     background-color: #f9f9f9;
@@ -471,8 +479,7 @@ onMounted(() => {
 }
 
 .attrs-panel {
-  width: 300px;
-  flex:0 0 300px;
+  flex:0 0 400px;
   border: 1px solid #ccc;
   margin-left: 20px;
   padding: 10px;

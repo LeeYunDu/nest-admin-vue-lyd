@@ -1,9 +1,8 @@
 <template>
   <div class="attrs-setting">
     <h3>属性设置</h3>
-    {{ useSettingFormItems }}
-    <div class="attrs-content">
-      <!-- <SettingForm :model="attrs.props" :fields="[{ key: 'y1' }, { key: 'y2' }]" /> -->
+    <div v-if="attrs" class="attrs-content">
+      <SettingForm :model="attrs.props" :fields="useSettingFormItems" />
     </div>
   </div>
 </template>
@@ -20,7 +19,11 @@ const props = defineProps({
   }
 })
 
+
 const useSettingFormItems = computed(() => {
+  if(props.attrs){
+    return get(componentAttrsConfig,props.attrs.type,[]).settingFormItems
+  }
   return []
 })
 </script>
