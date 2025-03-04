@@ -257,7 +257,6 @@ const addEventToDom = evt => {
     activeComponentAttrs.value = getComponentById(evt.item.dataset.nodeId)
     evt.item.classList.add('component-active')
     // page没有操作菜单项
-    console.log(evt.item.dataset.nodeId,'evt.item.dataset.nodeId')
 
     if(!(evt.item.dataset.nodeId == 'page')){
       createMenuElement(evt)
