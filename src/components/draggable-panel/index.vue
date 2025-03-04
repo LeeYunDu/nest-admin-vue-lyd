@@ -1,18 +1,28 @@
 <template>
   <div class="draggable-container">
     <div class="action-menu">
-      <div class="action-item" v-for="item in actionMenu" :key="item.key" @click="handleAction(item)">
+      <div
+        v-for="item in actionMenu"
+        :key="item.key"
+        class="action-item"
+        @click="handleAction(item)"
+      >
         {{ item.label }}
       </div>
-      <div class="tree-panel" v-show="showTreePanel">
-        <el-tree :data="panelComponents" :default-expand-all="true" node-key="nodeId" :props="defaultProps"></el-tree>
+      <div v-show="showTreePanel" class="tree-panel">
+        <el-tree
+          :data="panelComponents"
+          :default-expand-all="true"
+          node-key="nodeId"
+          :props="defaultProps"
+        ></el-tree>
       </div>
     </div>
-    <div class="component-library" ref="componentLibrary">
+    <div ref="componentLibrary" class="component-library">
       <div
-        class="component-item"
         v-for="(item, index) in items"
         :key="index"
+        class="component-item"
         :data-type="get(item, 'dataAttributes.type')"
         :data-is-container="get(item, 'dataAttributes.isContainer', false)"
         :data-class="get(item, 'dataAttributes.class', '')"
@@ -21,12 +31,16 @@
         {{ item.name }}
       </div>
     </div>
-    <div class="config-panel" ref="configPanel">
-      {{ panelComponents[0].children[0] }}
-      <div class="panel-content" data-type="page" data-node-id="page" ref="panelContent"></div>
+    <div ref="configPanel" class="config-panel">
+      <div
+        ref="panelContent"
+        class="panel-content"
+        data-type="page"
+        data-node-id="page"
+      ></div>
     </div>
 
-    <div class="attrs-panel" ref="attrsPanel">
+    <div ref="attrsPanel" class="attrs-panel">
       <div class="attrs-content">
         <AttrsSetting :attrs="activeComponentAttrs"></AttrsSetting>
       </div>
@@ -37,7 +51,7 @@
 <script setup>
 import { ref, reactive, onMounted,  nextTick, h, createApp } from 'vue'
 import Sortable from 'sortablejs'
-import { get } from 'lodash-es'
+import { cloneDeep, get } from 'lodash-es'
 import AttrsSetting from './attrsSetting/index.vue'
 import { componentLibray } from './config/component-config'
 import { ElTree } from 'element-plus'
@@ -48,6 +62,7 @@ const showTreePanel = ref(false)
 const defaultProps = reactive({
   children: 'children',
   label: 'componentName'
+
 })
 const activeComponent = ref(null)
 const activeComponentAttrs = ref(null)
@@ -72,7 +87,7 @@ const attrsPanel = ref(null)
 const currentHoverContainer = ref(null)
 
 // 方法
-const handleAction = (item) => {
+const handleAction = item => {
   switch (item.key) {
     case 'tree':
       showTreePanel.value = !showTreePanel.value
@@ -84,7 +99,7 @@ const handleAction = (item) => {
 
 const getUUID = () => new Date().getTime()
 
-const findContainer = (element) => {
+const findContainer = element => {
   let el = element
   for (let i = 0; i < 5 && el; i++) {
     if (el.dataset?.isContainer === 'true') {
@@ -95,7 +110,8 @@ const findContainer = (element) => {
   return null
 }
 
-const removeDragOverClass = (container) => {
+
+const removeDragOverClass = container => {
   const els = document.querySelectorAll('.drag-over')
   els.forEach(el => el.classList.remove('drag-over'))
 }
@@ -131,17 +147,17 @@ const initSortable = () => {
   })
 }
 
-const handleAdd = (evt) => {
+const handleAdd = evt => {
   addDataAttribute(evt)
   addItemToPanel(evt, evt.newIndex)
   addEventToDom(evt)
 }
 
-const handleEnd = (evt) => {
+const handleEnd = evt => {
   addItemToPanel(evt, evt.newIndex)
 }
 
-const handleLibStart = (evt) => {
+const handleLibStart = evt => {
   const clone = evt.item.cloneNode(true)
   clone.style.opacity = '0.5'
   evt.item.parentNode.insertBefore(clone, evt.item)
@@ -149,7 +165,7 @@ const handleLibStart = (evt) => {
   evt.item._clone = clone
 }
 
-const handleLibEnd = (evt) => {
+const handleLibEnd = evt => {
   evt.item.style.display = 'block'
   if (evt.item._clone) {
     evt.item._clone.style.opacity = '1'
@@ -157,7 +173,7 @@ const handleLibEnd = (evt) => {
 }
 
 // 数据操作方法
-const addDataAttribute = (evt) => {
+const addDataAttribute = evt => {
   const itemData = evt.item.dataset
   if (itemData.class) {
     evt.item.classList.add(itemData.class)
@@ -172,15 +188,15 @@ const addItemToPanel = (evt, index) => {
   const parentElement = evt.item.parentElement
   const curId = itemData.nodeId
   const parentId = parentElement.dataset.nodeId
-  
+
   if (itemData.parentId) {
     const parent = getComponentById(itemData.parentId)
     parent.children = parent.children.filter(child => child.nodeId !== curId)
   }
-  
+
   evt.item.dataset.parentId = parentId
   const parent = getComponentById(parentId)
-  
+
   if (parent) {
     parent.children.splice(index, 0, {
       nodeId: curId,
@@ -194,13 +210,13 @@ const addItemToPanel = (evt, index) => {
       isLocked: false
     })
   }
-  
+
   if (itemData.isContainer === 'true') {
     nextTick(() => createNestedContainers(evt))
   }
 }
 
-const createNestedContainers = (evt) => {
+const createNestedContainers = evt => {
   const itemClass = evt.item.dataset.class
   document.querySelectorAll(`.${itemClass}`).forEach(container => {
     Sortable.create(container, {
@@ -217,7 +233,7 @@ const createNestedContainers = (evt) => {
 }
 
 // 组件操作方法
-const getComponentById = (nodeId) => {
+const getComponentById = nodeId => {
   const search = components => {
     for (const comp of components) {
       if (comp.nodeId === nodeId) return comp
@@ -232,8 +248,10 @@ const getComponentById = (nodeId) => {
 }
 
 // 事件处理
-const addEventToDom = (evt) => {
-  const clickHandler = (e) => {
+const addEventToDom = evt => {
+  const clickHandler = e => {
+    console.log(evt.item.classList)
+
     if (activeComponent.value) {
       activeComponent.value.classList.remove('component-active')
     }
@@ -243,25 +261,25 @@ const addEventToDom = (evt) => {
     createMenuElement(evt)
     e.stopPropagation()
   }
-  
+
   evt.item.addEventListener('click', clickHandler)
 }
 
-const createMenuElement = (evt) => {
+const createMenuElement = evt => {
   const oldMenu = document.querySelector('.component-menu')
   if (oldMenu) oldMenu.remove()
 
   const menu = h('div', { class: 'component-menu' }, [
-    h('div', { 
+    h('div', {
       class: 'component-menu-item',
-      onClick: (e) => {
+      onClick: e => {
         handleMenuClick('delete', evt)
         e.stopPropagation()
       }
     }, '删除'),
-    h('div', { 
+    h('div', {
       class: 'component-menu-item',
-      onClick: (e) => {
+      onClick: e => {
         handleMenuClick('copy', evt)
         e.stopPropagation()
       }
@@ -278,20 +296,27 @@ const handleMenuClick = (type, evt) => {
   const item = evt.item
   const parent = item.parentElement
   const curId = item.dataset.nodeId
-  
+  const parentComp = getComponentById(parent.dataset.nodeId)
+
   switch (type) {
     case 'delete':
-      const parentComp = getComponentById(parent.dataset.nodeId)
       parentComp.children = parentComp.children.filter(child => child.nodeId !== curId)
       item.remove()
       break
     case 'copy':
       const clone = item.cloneNode(true)
+      let cloneIndex = parentComp.children.findIndex(item=>{
+        return item.nodeId == curId
+      })
+
+      let cloneComponent = cloneDeep(getComponentById(clone.dataset.nodeId))
       clone.dataset.nodeId = getUUID()
+      cloneComponent.nodeId = clone.dataset.nodeId
       clone.querySelector('.component-menu')?.remove()
       clone.classList.remove('component-active')
       addEventToDom({ item: clone })
       parent.appendChild(clone)
+      parentComp.children.splice(cloneIndex, 0, cloneComponent)
       break
   }
 }
@@ -299,7 +324,7 @@ const handleMenuClick = (type, evt) => {
 
 const initDragFeedback = () => {
   const panel = panelContent.value
-  
+
   panel.addEventListener('dragenter', e => {
     const container = findContainer(e.target)
     if (container) {
@@ -309,7 +334,7 @@ const initDragFeedback = () => {
   }, true)
 
   panel.addEventListener('dragleave', e => {
-    if (currentHoverContainer.value && 
+    if (currentHoverContainer.value &&
       !currentHoverContainer.value.contains(e.relatedTarget)) {
       currentHoverContainer.value.classList.remove('drag-over')
       currentHoverContainer.value = null
@@ -334,7 +359,6 @@ const observeContainerChanges = () => {
 }
 
 
-
 // 生命周期
 onMounted(() => {
   initSortable()
@@ -355,6 +379,7 @@ onMounted(() => {
   outline: 1px solid #ccc;
   background-color: #f9f9f9;
   position: relative;
+
   .action-item {
     cursor: pointer;
   }
@@ -373,6 +398,7 @@ onMounted(() => {
 
 .component-library {
   width: 200px;
+  flex:0 0 200px;
   border: 1px solid #ccc;
   padding: 10px;
   margin-right: 20px;
@@ -428,7 +454,7 @@ onMounted(() => {
 .component-active {
   border: 1px dashed blue;
   position: relative;
-  .component-menu {
+  ::v-deep(.component-menu){
     background: #cce5ff;
     display: flex;
     position: absolute;
@@ -443,10 +469,14 @@ onMounted(() => {
     }
   }
 }
+
 .attrs-panel {
   width: 300px;
+  flex:0 0 300px;
   border: 1px solid #ccc;
   margin-left: 20px;
   padding: 10px;
 }
+
+
 </style>
