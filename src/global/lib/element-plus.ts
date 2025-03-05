@@ -46,11 +46,15 @@ import {
   ElTimeline,
   ElTimePicker,
   ElTimelineItem,
-  ElTooltip
+  ElTooltip,
+  ElCheckbox,
+  ElCheckboxGroup
 } from 'element-plus'
 
 export default {
   install(app: App) {
+    app.component(ElCheckbox.name, ElCheckbox)
+    app.component(ElCheckboxGroup.name, ElCheckboxGroup)
     app.component(ElConfigProvider.name, ElConfigProvider)
     app.component(ElButton.name, ElButton)
     app.component(ElInput.name, ElInput)

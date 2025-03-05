@@ -3,16 +3,14 @@
     <el-form
       ref="form"
       :model="formData"
-      label-width="80px"
     >
-      <el-form-item v-for="(field, index) in fields" :key="index" :label="field.label">
-        <el-input v-model="formData[field.key]"></el-input>
-      </el-form-item>
+      <SettingFormItem v-for="(field, index) in fields" :key="index" v-bind="field" />
     </el-form>
   </div>
 </template>
 
 <script setup>
+import SettingFormItem from './setting-form-item.vue'
 import { reactive,watch } from 'vue'
 const props = defineProps({
   model:{
@@ -33,3 +31,9 @@ watch(()=>props.model,val=>{
   formData = val
 })
 </script>
+
+<style lang="scss" scoped>
+.setting-form{
+  padding: 20px;
+}
+</style>
