@@ -87,32 +87,23 @@ const emits = defineEmits([
 ])
 
 const attrs = useAttrs()
-const isBigScreen = inject('isBigScreen')
 
 // style
 const defaultHeaderStyle = computed(() => {
-  let style1920 = {
+  return  {
     height: '36px',
     color: 'rgba(255, 255, 255, 1)',
     fontWeight: '400',
     fontSize: '16px',
     textAlign: 'center'
   }
-  let style4800 = {
-    height: '44px',
-    color: 'rgba(255, 255, 255, 1)',
-    fontWeight: '400',
-    fontSize: '18px',
-    textAlign: 'center'
-  }
-  return isBigScreen ? style4800 : style1920
 })
 
 const defaultCellStyle = {
   height: '44px',
   color: 'rgba(255, 255, 255, 1)',
   fontWeight: '400',
-  fontSize: isBigScreen ? '18px' : '14px',
+  fontSize: '14px',
   textAlign: 'center'
 }
 
@@ -131,10 +122,12 @@ const _CellStyle = computed(() =>
 const table = ref(null)
 
 const columnsData = computed(() =>
-  props.columns.filter((i) => ('hidden' in i ? Boolean(i.hidden) : true))
+  props.columns.filter(i => ('hidden' in i ? Boolean(i.hidden) : true))
 )
 
-const isScroll = computed(() => 'scroll' in attrs)
+const isScroll = computed(() => {
+  return 'scroll' in attrs && props.data.length > 0
+})
 
 const selectionList = ref([])
 
@@ -142,11 +135,11 @@ function onTableSelectChange(selection) {
   if (hasIn(attrs, 'onSelectionChange')) return
   selectionList.value = []
   if (isString(props.selectionKey))
-    selectionList.value = selection.map((item) => item[props.selectionKey])
+    selectionList.value = selection.map(item => item[props.selectionKey])
   if (isArray(props.selectionKey)) {
     const selectMap = {}
     for (const key of props.selectionKey) selectMap[key] = null
-    selection.forEach((select) => {
+    selection.forEach(select => {
       const selectMapDeep = cloneDeep(selectMap)
       for (const key in selectMap) selectMapDeep[key] = select[key]
       selectionList.value.push(selectMapDeep)
@@ -171,7 +164,7 @@ function onTableFilterChange(filter) {
   if (hasIn(attrs, 'onFilterChange')) return
   const positionName = Object.keys(filter).join('')
   const index = positionName[positionName.length - 1]
-  const columns = columnsData.value.filter((item) => item.key)
+  const columns = columnsData.value.filter(item => item.key)
   const column = (columns[index - 1] && columns[index - 1]) || {}
   emits('filter', {
     key: column.key || positionName,
@@ -209,9 +202,7 @@ defineExpose({ table })
 .table-view {
   width: 100%;
   height: 100%;
-  display: flex;
-  flex-direction: column;
-  flex: 1;
+
   overflow-y: auto;
   ::v-deep(.el-table) {
     flex: 1;
@@ -235,8 +226,6 @@ defineExpose({ table })
       tr {
         th {
           color: #fff;
-          background: url('@/assets/img/component/table-th-bg.png') !important;
-          background-size: 100% 100% !important;
         }
       }
     }
@@ -244,7 +233,7 @@ defineExpose({ table })
     th.el-table__cell {
       // border: none;
       padding: 0;
-      background: #f6f8fc;
+      background:rgba(57, 156, 255, 0.36);
       font-size: 16px;
       color: #020810;
       font-family: 'Alibaba PuHuiTi', 'Alibaba PuHuiTi';

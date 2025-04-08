@@ -20,7 +20,7 @@ interface DictListMode {
 }
 
 // 创建dict key
-export function createDictKey(type: number | string) {
+export function createDictKey (type: number | string) {
   return `dict_${type}`
 }
 
@@ -37,7 +37,12 @@ const dictApis = [
 const app = {
   state: () => ({
     isLoadedDict: false,
-    dictData: {}
+    dictData: {},
+    globalData: {
+      // 是否开区麦克风
+      isOpenMic: false,
+      // 全局数据
+    }
   }),
 
   getters: {
@@ -49,7 +54,7 @@ const app = {
   },
 
   mutations: {
-    SET_DICT_DATA(state: any, data: any) {
+    SET_DICT_DATA (state: any, data: any) {
       state.isLoadedDict = true
       state.dictData = data || {}
       sessionStorage.setItem('dictData', JSON.stringify(state.dictData))
@@ -62,7 +67,7 @@ const app = {
      * @param param0
      * @returns
      */
-    async initDict({ commit, state }: any) {
+    async initDict ({ commit, state }: any) {
       try {
         const datas = await Promise.all(
           dictApis.map((item: any) =>
@@ -118,7 +123,7 @@ const app = {
      * @param type
      * @returns
      */
-    async getSingleChoose({ commit, state }: any, type: number) {
+    async getSingleChoose ({ commit, state }: any, type: number) {
       try {
         if (!type && type !== 0) return
         const useType = createDictKey(type)

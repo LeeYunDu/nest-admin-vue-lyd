@@ -31,20 +31,20 @@ const app = {
   },
 
   mutations: {
-    SET_LOGIN_INFO(state: any, data: any) {
+    SET_LOGIN_INFO (state: any, data: any) {
       const { token } = data || {}
       const useToken = Cookie.get('LOGIN_TOKEN') || token || ''
       state.loginInfo.token = useToken
       sessionStorage.setItem('LOGIN_TOKEN', useToken)
     },
 
-    CLEAR_LOGIN_INFO(state: any) {
+    CLEAR_LOGIN_INFO (state: any) {
       state.loginInfo = {}
       Cookie.set('LOGIN_TOKEN', '')
       sessionStorage.setItem('LOGIN_TOKEN', '')
     },
 
-    SET_LOGIN_REDIRECT(state: any, data: any) {
+    SET_LOGIN_REDIRECT (state: any, data: any) {
       state.redirect = data || {
         path: '',
         type: '',
@@ -55,13 +55,15 @@ const app = {
 
   actions: {
     // 账号密码登录
-    async login(
+    async login (
       { commit }: ActionContext<LoginStoreMode, any>,
       params: LoginMode
     ) {
       try {
         let result: any
         const data = await uLogin(params)
+        console.log(data)
+
         // 获取用户信息
         Cookie.set('realName', data.realName)
         Cookie.set('token', data.token)
@@ -75,7 +77,7 @@ const app = {
     },
 
     // login by token
-    async tokenLogin({ commit }: any, token: string) {
+    async tokenLogin ({ commit }: any, token: string) {
       try {
         let result: any
         const { data, status, errMsg }: any =
@@ -94,7 +96,7 @@ const app = {
     },
 
     // 浙政钉扫码登录
-    async dingLogin({ commit }: any, params: DingLoginMode) {
+    async dingLogin ({ commit }: any, params: DingLoginMode) {
       try {
         let result: any
         const { data, status, errMsg } = await uDingLogin(params)
@@ -112,7 +114,7 @@ const app = {
     },
 
     // 退出
-    async logout({ commit }: any) {
+    async logout ({ commit }: any) {
       try {
         const { status, errMsg }: ResponseMode = await uLogout()
         if (status !== 200) {
@@ -132,7 +134,7 @@ const app = {
       }
     },
 
-    async setLoginRedirect({ commit }: any, data: any) {
+    async setLoginRedirect ({ commit }: any, data: any) {
       try {
         commit('SET_LOGIN_REDIRECT', data)
       } catch (error) {

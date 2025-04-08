@@ -8,17 +8,17 @@ import store from '@/store'
 import { InternalAxiosRequestConfig } from 'axios'
 // init
 const service = axios.create({
-  timeout: 1000 * 30
+  timeout: 1000 * 60
 })
 // request
 service.interceptors.request.use(
   (config: InternalAxiosRequestConfig) => {
-    config.headers.token = ''
+    // config.headers.token = ''
     const token = Cookies.get('token') || ''
     if (token) {
       // 部分项目需要，与后端对接确认
-      config.headers.token = token
       // config.headers.token = token
+      config.headers['Authorization'] = 'Bearer ' + token
     }
     return config
   },
@@ -56,7 +56,7 @@ service.interceptors.response.use(
       // 有 code 代表这是一个后端接口 可以进行进一步的判断
       switch (code) {
         case 200:
-          return dataAxios.data
+          return dataAxios
         case 'xxx':
           // [ 示例 ] 其它和后台约定的 code
           ElMessage.error(
@@ -142,7 +142,6 @@ const ajax = function (obj: any, config?: any) {
   const type = obj.type ? obj.type.toUpperCase() : 'GET'
   const uConfig = Object.assign({}, config || {})
   const params = obj.params
-
   switch (type) {
     case 'POST':
       return service.post(url, params, { ...uConfig })

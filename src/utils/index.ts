@@ -33,7 +33,7 @@ export const generateId = (): string =>
 /**
  * @desc 转换平级数据为树形数据
  */
-export function transformToTree(sNodes: Array<any>, setting?: MenuMapperModel) {
+export function transformToTree (sNodes: Array<any>, setting?: MenuMapperModel) {
   const set = {
     children: 'children',
     idKey: 'id',
@@ -80,7 +80,7 @@ export function transformToTree(sNodes: Array<any>, setting?: MenuMapperModel) {
 /**
  * 首字母转大写
  */
-export function initialToUpperCase(str: string) {
+export function initialToUpperCase (str: string) {
   if (!isString(str)) return str
   const strs = str.split('')
   strs[0] = strs[0].toUpperCase()
@@ -91,7 +91,7 @@ export function initialToUpperCase(str: string) {
  * @param {object} item 跳转对象
  * @param {object} params 跳转添加的参数
  * */
-export function open(item: MenuMode, params: any = {}) {
+export function open (item: MenuMode, params: any = {}) {
   const iPath = item.routerPath || item.path
   const iLink = item.link
 
@@ -105,7 +105,7 @@ export function open(item: MenuMode, params: any = {}) {
 }
 
 // 替换地址中{}包裹的参数,路由则返回路由对象
-export function replaceUrlParams(url: string, params: any, isRouter = false) {
+export function replaceUrlParams (url: string, params: any, isRouter = false) {
   if (!url) return url
   const reg = /\{([^}]+)\}/g
   const result = url.match(reg)
@@ -125,7 +125,7 @@ export function replaceUrlParams(url: string, params: any, isRouter = false) {
 }
 
 // 获取地址栏url中的参数
-export function getUrlParams(url: string) {
+export function getUrlParams (url: string) {
   const params: any = {}
   const arr = url.split('?')
   if (arr.length > 1) {
@@ -142,7 +142,7 @@ export function getUrlParams(url: string) {
 /**
  * 跳转登录
  */
-export async function ssoLogin(gotoUrl: string = location.href) {
+export async function ssoLogin (gotoUrl: string = location.href) {
   const { DEV, VITE_DOMAIN } = import.meta.env
   const domain = DEV ? VITE_DOMAIN : location.origin
   const href = `${domain}/fib-screen/index.html#/login?redirect=${gotoUrl}`
@@ -154,7 +154,7 @@ export async function ssoLogin(gotoUrl: string = location.href) {
  * @param key
  * @returns
  */
-export function getQuery(key: string | string[]) {
+export function getQuery (key: string | string[]) {
   const url = location.href.split('?')
   const p = url?.[1]?.split('&')
   if (!p || p.length < 1) return
@@ -183,14 +183,14 @@ export function getQuery(key: string | string[]) {
 /**
  * 时间转换
  */
-export function parseTime(time: string | number | Date, cFormat?: string) {
+export function parseTime (time: string | number | Date, cFormat?: string) {
   if (!time) return ''
   return dayjs(time).format(cFormat || 'YYYY-MM-DD')
 }
 /**
  * 判断数据类型
  */
-export function dataType(data: unknown) {
+export function dataType (data: unknown) {
   let type = 'String'
 
   if (Object.prototype.toString.call(data) === '[object Object]') {
@@ -218,7 +218,7 @@ export function dataType(data: unknown) {
  * getKey returnType 返回类型
  * }
  */
-export function parseDict(key: string | number, argOptions: any) {
+export function parseDict (key: string | number, argOptions: any) {
   const { options, dictName, byKey, getKey, split, returnType } = argOptions
   if (!key || (!dictName && !options)) return
   let dicts: any
@@ -272,7 +272,7 @@ export function parseDict(key: string | number, argOptions: any) {
  * @param {*} data
  * @param {*} structure
  */
-export function deepData(data: any, structure: string, type = 'clone') {
+export function deepData (data: any, structure: string, type = 'clone') {
   if (!structure || !data) return data
   const _arr = structure.split('.')
   let convertData = data
@@ -312,7 +312,7 @@ export function deepData(data: any, structure: string, type = 'clone') {
 /**
  * 转化value
  */
-export function convertValue(
+export function convertValue (
   argValue: string | number,
   argType: string | string[],
   argOption: any | any[]
@@ -320,7 +320,7 @@ export function convertValue(
   if (!argType) return argValue
   let types: any = argType
   if (!isArray(argType)) {
-    ;('')
+    ; ('')
     types = [argType]
   }
 
@@ -361,7 +361,7 @@ export function convertValue(
       case 'defaultValue':
         defaultValue =
           isString(option.value) &&
-          ['[', '{'].includes(option.value.substring(0, 1))
+            ['[', '{'].includes(option.value.substring(0, 1))
             ? JSON.parse(option.value)
             : option.value
         value = value === undefined || value === '' ? option.value : value
@@ -419,13 +419,13 @@ export function convertValue(
  * @param {*} url 链接
  * @param {*} type 类型: 'auth'： 需要登录并传递参数
  */
-export function outLinkOpen(url: string) {
+export function outLinkOpen (url: string) {
   window.open(url)
 }
 /**
  * 生成uuid
  */
-export function uuid(size = 18, prefix?: string) {
+export function uuid (size = 18, prefix?: string) {
   const s: any[] = []
   const hexDigits = '0123456789abcdef'
   for (let i = 0; i < size; i++) {
@@ -439,7 +439,7 @@ export function uuid(size = 18, prefix?: string) {
   return (prefix || '') + uuid
 }
 
-export function calculateCenter(lnglatarr: any) {
+export function calculateCenter (lnglatarr: any) {
   const total = lnglatarr.length
   let X = 0
   let Y = 0
@@ -463,12 +463,12 @@ export function calculateCenter(lnglatarr: any) {
   return new AMap.LngLat((Lng * 180) / Math.PI, (Lat * 180) / Math.PI)
 }
 
-export function convertToFunction(str: string) {
+export function convertToFunction (str: string) {
   if (!isStringFunction(str)) return () => str
   return new Function(`return ${str}`)()
 }
 
-export function getLastMonthDate() {
+export function getLastMonthDate () {
   const today = new Date()
   const lastMonth = new Date(
     today.getFullYear(),
@@ -479,15 +479,14 @@ export function getLastMonthDate() {
 }
 
 // rem 转化
-export function convertRem(rem: number, docWidth: number) {
+export function convertRem (rem: number, docWidth: number) {
   return rem * 100 * (document.documentElement.clientWidth / docWidth)
 }
 
 // 图片获取
-export function imgPath(name: string) {
-  // return `src/assets/${name}` // 直接使用相对路径
-  return new URL(`../assets/${name}`, import.meta.url).href
-  // return new URL('@/assets/', import.meta.url) + '/' + name
+export function imgPath (name: string) {
+  return `static/images/${name}`
+  // return new URL('@static/images/', import.meta.url) + name
 }
 
 export const pxToRem = (px: number | string) => {

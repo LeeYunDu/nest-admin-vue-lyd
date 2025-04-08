@@ -37,13 +37,33 @@
                 <el-icon size="24"><Lock /></el-icon>
               </template>
             </FormItemCol>
+            <FormItemCol
+              v-model="state.params.code"
+              :span="24"
+              label=""
+              prop="code"
+              type="slot"
+              slot-key="code"
+              require
+              placeholder="请输入验证码"
+            >
+              <template #prefix>
+                <el-icon size="24"><Lock /></el-icon>
+              </template>
+              <template #code>
+                <el-input v-model="state.params.code" maxlength="4" placeholder="请输入验证码" />
 
-            <div class="submit-btn">
-              <!-- <el-button class="btn register" @click="$router.replace('/')">回到首页</el-button> -->
+                <div class="login-code-wrap">
+                  <div class="login-code">
+                    <img :src="codeUrl" class="login-code-img" @click="getCode" />
+                  </div>
+                </div>
+              </template>
+            </FormItemCol>
+            <div class="submit-btn " @click="onSubmit">
               <el-button
                 class="btn login"
                 :loading="state.loading"
-                @click="onSubmit"
               >
                 登录
               </el-button>
@@ -57,28 +77,30 @@
 
 <script setup lang="ts">
 import FormItemCol from '@/components/form-item-col/index.vue'
-import { ref, reactive } from 'vue'
+import { ref, reactive, onMounted } from 'vue'
 import { useStore } from 'vuex'
 import { ElMessage } from 'element-plus'
 import { useRoute, useRouter } from 'vue-router'
 import Cookies from 'js-cookie'
 import { encrypt } from '@/libs/sm4-crypt'
-
+import { getLoginCodeApi } from '@/api/modules/java.login'
 defineProps({})
 
 const store = useStore()
 
 const router = useRouter()
-const loginTitle = ref('vue3-template')
+const loginTitle = ref('安福高新技术产业园区')
 // -------- inject --------
 
 // -------- ref --------
 const formRef = ref<any>(null)
-
+const codeUrl = ref('')
 const state = reactive({
   params: {
-    username: 'admin',
-    password: 'hzbt@2013'
+    username:import.meta.env.VITE_USERNAME,// admin
+    password: import.meta.env.VITE_PASSWORD,// Sjy@123qwe
+    code: '',
+    uuid: ''
   },
   loading: false
 })
@@ -93,19 +115,32 @@ async function onSubmit() {
     res = await store.dispatch(
       'login',
       Object.assign({}, state.params, {
-        password: encrypt(state.params.password)
+        // password: encrypt(state.params.password)
+        password: state.params.password
       })
     )
 
     state.loading = false
     if (res.success) {
       ElMessage({ type: 'success', message: '登录成功!', duration: 1500 })
-      router.replace('/home')
+      router.replace('/')
+    }else{
+      getCode()
     }
   } catch (e) {
     console.log(e)
   }
 }
+
+async function getCode () {
+  const res = await getLoginCodeApi()
+  codeUrl.value = 'data:image/jpeg;base64,' + res.img
+  state.params.uuid = res.uuid
+}
+
+onMounted(async () => {
+  await getCode()
+})
 </script>
 
 <style scoped lang="scss">
@@ -118,7 +153,7 @@ async function onSubmit() {
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-  background-image: url('@/assets/login-img/bg.png');
+  background-image: imgPathScss('login/bg.png');
   z-index: 111;
   display: flex;
   flex-direction: column;
@@ -156,7 +191,7 @@ async function onSubmit() {
   margin-top: 42px;
   padding: 0 74px;
   background-size: 100% 100%;
-  background-image: url('@/assets/login-img/bg-wrap.png');
+  background-image: imgPathScss('login/bg-wrap.png');
 
   .cont-title {
     margin-top: 34px;
@@ -244,7 +279,7 @@ async function onSubmit() {
     height: 60px;
     padding-bottom: 10px;
     background-size: 100% 100%;
-    background-image: url('@/assets/login-img/bg-btn.png');
+    background-image:imgPathScss('login/bg-btn.png');
     cursor: pointer;
 
     .btn {
@@ -270,5 +305,17 @@ async function onSubmit() {
 .icon {
   width: 20px;
   height: 20px;
+}
+
+.login-code {
+  position: absolute;
+  right: 0;
+  top: 0;
+  height: 100%;
+  img{
+    height: 100%;
+    background: #dcdff1;
+    cursor: pointer;
+  }
 }
 </style>
