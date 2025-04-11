@@ -22,7 +22,7 @@ router.beforeEach(
       if (meta.permission === false) return next()
 
       const { router: defaultTo } = await addRoutes()
-      await syncIng(to)
+      await syncIng(to,next)
       if (defaultTo) return nextReplace(to, next)
 
       doNext(to, from, next)
