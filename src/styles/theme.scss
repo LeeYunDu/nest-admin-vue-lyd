@@ -123,9 +123,6 @@ $title: (
   -webkit-line-clamp: $number;
 }
 
-
-$node-path: '/node-szzt';
-$file-id:'2164';
-@function metaFilePathScss($fileName) {
-  @return url(#{$node-path}/file/download/#{$file-id}/#{$fileName});
+@function imgPathScss($path) {
+  @return url('~/static/images/#{$path}');
 }

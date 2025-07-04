@@ -82,14 +82,13 @@ import { useStore } from 'vuex'
 import { ElMessage } from 'element-plus'
 import { useRoute, useRouter } from 'vue-router'
 import Cookies from 'js-cookie'
-import { encrypt } from '@/libs/sm4-crypt'
 import { getLoginCodeApi } from '@/api/modules/java.login'
 defineProps({})
 
 const store = useStore()
 
 const router = useRouter()
-const loginTitle = ref('安福高新技术产业园区')
+const loginTitle = ref('登录')
 // -------- inject --------
 
 // -------- ref --------
@@ -203,7 +202,7 @@ onMounted(async () => {
     line-height: 28px;
   }
 
-  :deep .el-form {
+  ::v-deep(.el-form) {
     margin-top: 60px;
     .el-form-item {
       margin-bottom: 24px !important;

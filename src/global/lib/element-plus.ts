@@ -52,7 +52,7 @@ import {
 } from 'element-plus'
 
 export default {
-  install(app: App) {
+  install (app: App) {
     app.component(ElCheckbox.name, ElCheckbox)
     app.component(ElCheckboxGroup.name, ElCheckboxGroup)
     app.component(ElConfigProvider.name, ElConfigProvider)

@@ -57,14 +57,11 @@ export default () => {
     css: {
       preprocessorOptions: {
         scss: {
+          // 使用新版 Dart Sass API
+          implementation: require('sass'),
           additionalData: `@use "@/styles/element.scss" as *;
           @use "@/styles/theme.scss" as *;
           `
-        },
-        less: {
-          javascriptEnabled: true,
-          // 覆盖样式变量
-          modifyVars: {}
         }
       }
     },

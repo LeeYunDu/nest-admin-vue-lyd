@@ -25,5 +25,26 @@ export const constantRoutes: Array<any> = [
     name: '500',
     component: () => import('@/pages/errorPages/500.vue'),
     meta: { permission: false, showHeader: false }
-  }
-];
+  },
+  {
+    path: '/template',
+    name: 'Template',
+    component: () => import('@/pages/template/index.vue'),
+    meta: { permission: false, title: 'template' },
+    redirect: '/template/table',
+    children: [
+      {
+        path: 'form',
+        name: 'TemplateForm',
+        component: () => import('@/pages/template/form.vue'),
+        meta: { permission: false, title: 'form' }
+      },
+      {
+        path: 'table',
+        name: 'TemplateTable',
+        component: () => import('@/pages/template/table.vue'),
+        meta: { permission: false, title: 'table' }
+      }
+    ]
+  },
+]
