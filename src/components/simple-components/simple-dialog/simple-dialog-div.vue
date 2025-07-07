@@ -1,9 +1,9 @@
 <template>
   <div
     v-if="show"
-    class="SimpleDialog"
+    class="simple-dialog"
     :class="{
-      'SimpleDialog-enter-active': show
+      'simple-dialog-enter-active': show
     }"
     :style="useStyle"
   >
@@ -11,7 +11,7 @@
       <i class="iconfont-screen icon-screen-jiantou icon"></i>
     </div>
 
-    <div v-if="show" class="SimpleDialog-body">
+    <div v-if="show" class="simple-dialog-body">
       <slot></slot>
     </div>
   </div>
@@ -86,7 +86,7 @@ const onCancel = () => {
 </script>
 
 <style lang="scss" scoped>
-.SimpleDialog {
+.simple-dialog {
   position: absolute;
   top: 0;
   display: flex;
@@ -103,7 +103,7 @@ const onCancel = () => {
 }
 
 // 弹窗打开动画
-.SimpleDialog-enter-active {
+.simple-dialog-enter-active {
   animation: SimpleDialogOpen 0.3s ease-in-out;
 }
 
@@ -138,7 +138,7 @@ const onCancel = () => {
   }
 }
 
-.SimpleDialog-body {
+.simple-dialog-body {
   display: flex;
   height: 100%;
   flex: 1;

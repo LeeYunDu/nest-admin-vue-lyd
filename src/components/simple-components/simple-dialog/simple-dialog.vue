@@ -4,7 +4,7 @@
     v-bind="$attrs"
     destroy-on-close
     append-to-body
-    class="Simple-modal"
+    class="simple-modal"
     @close="onCancel"
   >
     <template v-for="( slot, slotKey ) in $slots" #[slotKey]>
@@ -62,7 +62,7 @@ const onCancel = () => {
 </script>
 
 <style lang="scss">
-.Simple-modal {
+.simple-modal {
   &.el-dialog{
     border-radius: 0;
     border: 1px solid;
