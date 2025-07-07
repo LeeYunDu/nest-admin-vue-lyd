@@ -1,5 +1,5 @@
 import { ExtractPropTypes, PropType } from 'vue'
-import { GridProps } from '../grid/types'
+import { GridProps } from '../grid/type'
 import { RuleItem } from 'async-validator'
 
 export type LabelType = 'slot' | 'input' | 'select' | 'date-picker' | 'switch' | 'time-picker' | 'time-select' | 'upload' | 'radio-group' | 'radio' | 'input-number' | 'color-picker' | 'checkbox-group' | 'checkbox' | 'autocomplete'

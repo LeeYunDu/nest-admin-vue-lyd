@@ -95,7 +95,7 @@ import { set, get,isFunction } from 'lodash-es'
 import { UiGrid, UiGridItem } from '../../grid'
 import { useVModel } from '@vueuse/core'
 import { FormChangeOutput, FormProps, LabelItem, uiFormProps } from '../types'
-import { GridProps } from '../../grid/types'
+import { GridProps } from '../../grid/type'
 import { FormMode } from '@/typings/items'
 
 const labelOptions = {
@@ -119,7 +119,7 @@ defineExpose({
 
 const uiFormRef: Ref<any> = ref('uiFormRef')
 const itemPrefix = ref('el-')
-const params = ref<any>({})
+let params = ref<any>({})
 const useModel: Ref<any> = useVModel(props, 'model', emits)
 const showlist = ref<LabelItem[]>([])
 
@@ -145,7 +145,7 @@ const rules: ComputedRef<any> = computed(() => {
 watch(() => props.model, async () => {
   await Promise.resolve().then()
   batchShow()
-  setValue(params.value, props.model, props.labels)
+  params.value = props.model
   Object.keys(params.value).map((key: string) => {
     const label = (useLabels.value.find((item: LabelItem) => item.key === key) || {}) as LabelItem
     // 清除插槽的校验
@@ -165,13 +165,6 @@ watch(() => props.labels, () => {
     return item
   })
 }, { immediate: true })
-
-function setValue (ari: any, data: any, labels: LabelItem[]) {
-  labels.map((label: any) => {
-    const labelValue = get(data, label.key)
-    ari[label.key] = labelValue
-  })
-}
 
 function setProps (item: LabelItem) {
   // grid item

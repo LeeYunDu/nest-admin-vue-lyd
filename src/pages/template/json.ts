@@ -11,7 +11,7 @@ export const formFields = [
     },
   },
   {
-    label: '不显示label', key: 'y1', type: 'input',
+    label: '不显示label', key: 'y91', type: 'input',
     props: {
       gridItem: { span: 24 },
       formItem: { required: true, labelWidth: 0 },
@@ -64,7 +64,7 @@ export const formFields = [
     label: '选择器', key: 'y5', type: 'select', options: [
       { label: '选项一', value: '1' }
     ], props: {
-      gridItem: { span: 24 },
+      gridItem: { span: 6 },
       clearable: true,
       formItem: { required: true, }
     },
@@ -91,4 +91,9 @@ export const formFields = [
     label: '插槽字段', key: 'y9', slotName: 'slotName', type: 'slot',
     props: {}
   },
+  {
+    label: 'label插槽', key: 'y10', type: 'input',
+    props: {}
+  },
+
 ]
