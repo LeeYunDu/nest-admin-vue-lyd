@@ -20,7 +20,9 @@ const routes: Array<RouteRecordRaw> = [
     redirect: '/home',
     component: Layout,
     children: []
-  }
+  },
+  // 最后添加 404 路由
+  { path: '/:pathMatch(.*)*', name: 'NotFound', component: () => import('@/pages/errorPages/404.vue') }
 ]
 const router = createRouter({
   // history: createWebHistory(), // 使用 history 模式
