@@ -92,7 +92,7 @@ const attrs = useAttrs()
 const defaultHeaderStyle = computed(() => {
   return  {
     height: '36px',
-    color: 'rgba(255, 255, 255, 1)',
+    color: 'rgba(0, 0, 0, 1)',
     fontWeight: '400',
     fontSize: '16px',
     textAlign: 'center'
@@ -101,7 +101,7 @@ const defaultHeaderStyle = computed(() => {
 
 const defaultCellStyle = {
   height: '44px',
-  color: 'rgba(255, 255, 255, 1)',
+  color: 'rgba(0, 0, 0, 1)',
   fontWeight: '400',
   fontSize: '14px',
   textAlign: 'center'
@@ -202,8 +202,9 @@ defineExpose({ table })
 .table-view {
   width: 100%;
   height: 100%;
-
   overflow-y: auto;
+  display: flex;
+  flex-direction: column;
   ::v-deep(.el-table) {
     flex: 1;
     background: transparent;
@@ -231,47 +232,44 @@ defineExpose({ table })
     }
 
     th.el-table__cell {
-      // border: none;
-      padding: 0;
-      background:rgba(57, 156, 255, 0.36);
-      font-size: 16px;
-      color: #020810;
-      font-family: 'Alibaba PuHuiTi', 'Alibaba PuHuiTi';
-      border-bottom: 0;
-
-      .cell {
-        white-space: nowrap;
-      }
+        font-size: 16px;
+        font-family: Source Han Sans CN-Regular, Source Han Sans CN;
+        font-weight: 400;
+        color: #020810;
+        background: #F6F8FC;
+        // border: none;
+        padding: 13px 0 13px 0;
+        .cell {
+          white-space: nowrap;
+        }
     }
 
     tr {
-      // border: none;
-      background-repeat: no-repeat;
-      background-size: 100%;
-      background-color: transparent;
+        background-color: transparent;
+        // border: none;
+        background-repeat: no-repeat;
+        background-size: 100%;
 
-      td {
-        padding: 0;
-        // border: none !important;
-        font-size: 16px;
-        color: white;
-        font-family: 'Alibaba PuHuiTi', serif;
-        font-weight: 400;
-        line-height: 19px;
-        border-bottom: 0;
-      }
-
-      &:hover {
         td {
-          background: transparent !important;
+          // border: none !important;
+          font-size: 16px;
+          font-family: Source Han Sans CN-Regular, Source Han Sans CN;
+          font-weight: 400;
+          color: #686B73;
+          line-height: 19px;
+          padding: 10px 0;
+        }
 
-          &.el-table-fixed-column--right {
-            z-index: 99;
-            background: white !important;
+        &:hover {
+          td {
+            background: transparent !important;
+            &.el-table-fixed-column--right {
+              z-index: 99;
+              background: white!important;
+            }
           }
         }
       }
-    }
 
     .el-table__row--level-0 {
       .type-name {
@@ -304,6 +302,29 @@ defineExpose({ table })
         }
       }
     }
+
+    .action-btn {
+      font-size: 16px;
+      font-family: PingFangSC-Regular, PingFang SC;
+      font-weight: 400;
+      color: #125DD5;
+      margin-left: 12px;
+      cursor: pointer;
+      position: relative;
+      &~.action-btn {
+        &::before {
+          content: '';
+          position: absolute;
+          left: -6px;
+          width: 1px;
+          height: 50%;
+          top: 50%;
+          transform: translateY(-50%);
+          background: #125DD5;
+        }
+      }
+
+    }
   }
 }
 
@@ -319,13 +340,5 @@ defineExpose({ table })
   }
 }
 
-@media (min-width: 3000px) {
-  .table-view {
-    ::v-deep(.el-table) {
-      .el-table__body-wrapper {
-        margin-top: 25px;
-      }
-    }
-  }
-}
+
 </style>

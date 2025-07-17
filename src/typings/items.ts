@@ -103,6 +103,7 @@ export interface FieldItem extends BaseUiMode {
   data?: any
   inputKey?: string
   dataKey?: string
+  [x: string]: any
 }
 
 export interface BtnItem extends BaseUiMode {

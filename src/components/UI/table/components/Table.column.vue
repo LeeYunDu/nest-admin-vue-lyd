@@ -34,15 +34,15 @@
     <template v-else-if="columnProps.formatType === 'time'" #default="{ row }">
       <span :style="{ color: columnProps.setColor || '' }">{{
         $formatDate(row[columnProps.key], columnProps.valueFormat) ||
-        row[columnProps.key] ||
-        ''
+          row[columnProps.key] ||
+          ''
       }}</span>
     </template>
     <template v-else-if="columnProps.formatType === 'dict'" #default="{ row }">
       <span :style="{ color: columnProps.setColor || '' }">{{
         getDictValue(columnProps.valueFormat, row[columnProps.key]) ||
-        row[columnProps.key] ||
-        ''
+          row[columnProps.key] ||
+          ''
       }}</span>
     </template>
     <template v-else-if="columnProps.formatter" #default="{ row }">
@@ -57,12 +57,11 @@
         class="clickable"
         :style="{ color: columnProps.setColor || '' }"
         @click="$emit('clickable', { key: columnProps.key, row })"
-        >{{
-          columnProps?.formatter
-            ? columnProps.formatter(row[columnProps.key] || '')
-            : row[columnProps.key] || ''
-        }}</span
-      >
+      >{{
+        columnProps?.formatter
+          ? columnProps.formatter(row[columnProps.key] || '')
+          : row[columnProps.key] || ''
+      }}</span>
     </template>
     <template v-else-if="columnProps.setColor" #default="{ row }">
       <span :style="{ color: columnProps.setColor || '' }">{{
