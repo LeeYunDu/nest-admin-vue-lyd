@@ -1,4 +1,4 @@
-const { VITE_PROJECT_BASE, VITE_APP_BASE_API } = import.meta.env
+const { VITE_PROJECT_BASE, VITE_APP_BASE_JAVA_API } = import.meta.env
 
 export const BaseConfig = {
   portalBaseUrl: `/${String(VITE_PROJECT_BASE)}`,
@@ -9,7 +9,7 @@ export const BaseConfig = {
 export const ApiProxy = {
   java: {
     // 主应用
-    main: VITE_APP_BASE_API
+    main: VITE_APP_BASE_JAVA_API
   }
 }
 
@@ -25,7 +25,7 @@ export default {
     cacheView: true,
     meta: {
       // 用到的文件夹id集合
-      folders: [2164]
+      folders: []
     }
   },
   component: {

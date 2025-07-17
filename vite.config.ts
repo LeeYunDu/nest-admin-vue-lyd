@@ -37,13 +37,20 @@ export default () => {
       host: true,
       proxy: {
         // api proxy
-        '/api-server-address': {
-          target: 'http://172.16.208.12:18590',
+        '/java_main_api': {
+          // target: 'http://192.168.110.218:8096',
+          // target: 'http://192.168.110.115:8080',
+          // target: 'http://192.168.110.150:8080',
+          // target: 'http://117.171.199.103:8082', // 线上
+          // target: 'http://36.213.68.154:8099', // 线上
+          target: 'http://175.27.162.246:8196', // 线上
+          // target: 'http://36.213.68.154:8099', // 测试
+          // target: 'https://www.afgxq.com:17087', // 测试
           changeOrigin: true,
           rewrite: path =>
             path.replace(
-              new RegExp('^/api-server-address'),
-              '/api-server-address'
+              new RegExp('^/java_main_api'),
+              '/'
             )
         }
       }

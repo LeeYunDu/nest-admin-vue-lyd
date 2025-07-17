@@ -76,7 +76,7 @@
 </template>
 
 <script setup lang="ts">
-import FormItemCol from '@/components/form-item-col/index.vue'
+import FormItemCol from '@/components/simple-components/simple-form-item/index.vue'
 import { ref, reactive, onMounted } from 'vue'
 import { useStore } from 'vuex'
 import { ElMessage } from 'element-plus'
