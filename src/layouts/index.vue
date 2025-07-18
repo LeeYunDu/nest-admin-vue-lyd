@@ -25,7 +25,7 @@ import { computed, ref } from 'vue'
 import useCheckedMenu from '@/hooks/state/use-checked-menu'
 import ViewHeader from './components/header.vue'
 import ViewMain from './components/main.vue'
-// import ViewAside from './components/aside.vue';
+import ViewAside from './components/aside.vue'
 import { RouteLocationMatched, useRoute } from 'vue-router'
 import { MenuMode } from '@/typings/data'
 import { get } from 'lodash-es'

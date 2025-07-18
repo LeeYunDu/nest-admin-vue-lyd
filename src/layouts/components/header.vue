@@ -1,7 +1,7 @@
 <template>
   <section class="layout-header">
     <section class="left" @click="onClick">
-      <span class="title">{{ title }}</span>
+      <span class="title">模版项目</span>
     </section>
     <section class="center">
       <!-- <AppMenu :menus="headerMenus" :props="menuProps" /> -->

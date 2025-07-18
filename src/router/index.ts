@@ -24,6 +24,8 @@ const routes: Array<RouteRecordRaw> = [
   // 最后添加 404 路由
   { path: '/:pathMatch(.*)*', name: 'NotFound', component: () => import('@/pages/errorPages/404.vue') }
 ]
+
+
 const router = createRouter({
   // history: createWebHistory(), // 使用 history 模式
   history: createWebHashHistory(),

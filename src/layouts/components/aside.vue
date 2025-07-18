@@ -1,5 +1,5 @@
 <template>
-  <section class="layout-side" :class="[sideTheme]">
+  <section class="layout-side" :class="[]">
     <section class="content scroll-y">
       <AppMenu :menus="menus" />
     </section>
@@ -8,15 +8,17 @@
 <script lang="ts" setup>
 import AppMenu from './common/menu.vue'
 import useApp from '@/hooks/state/use-app'
-
+import { useBussinessRoutes } from '@/router/modules/bussiness'
 // hooks
-const { sideMenus: menus, sideTheme } = useApp()
-
+// const { sideMenus: menus, sideTheme } = useApp()
+console.log(useBussinessRoutes(),55)
+const menus = useBussinessRoutes()
+// const sideTheme = ''
 </script>
 <style lang="scss" scoped>
 .layout-side {
   width: 100%;
-  min-height: 50%;
+  min-height: 100%;
   max-height: 100%;
   background: linear-gradient(180deg, #FFFFFF 0%, #FFFFFF 78%, #ECF4FF 100%);
   box-shadow: 0px 2px 4px 0px rgba(237,237,237,0.5);

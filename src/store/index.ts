@@ -2,6 +2,7 @@ import { createStore } from 'vuex'
 import AppModule from './modules/app'
 import LoginModule from './modules/login'
 import UserModule from './modules/user'
+import MenuModule from './modules/menu'
 import RouterModule from './modules/router'
 import DataModule from './modules/data'
 
@@ -21,6 +22,11 @@ const store = createStore({
      * 用户相关
      */
     UserModule,
+
+    /**
+      * 菜单及权限相关
+      */
+    MenuModule,
 
     /**
      * 路由相关

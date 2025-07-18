@@ -1,5 +1,5 @@
 <template>
-  <section class="ui-component">
+  <section class="ui-form">
     <el-form
       ref="uiFormRef"
       :model="params"
@@ -269,7 +269,7 @@ function validate () {
 
 </script>
 <style lang="scss" scoped>
-.ui-component {
+.ui-form {
   ::v-deep(.el-form) {
     &.el-form--label-left {
       .el-form-item__label {
@@ -286,6 +286,8 @@ function validate () {
       align-items: center;
       justify-content: flex-end;
       line-height: 1.2;
+      font-size: 16px;
+      color: #686b73;
     }
     .el-form-item {
       width: 100%;

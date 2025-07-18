@@ -1,13 +1,13 @@
 import { isArray, isString, isNumber, isStringFunction } from './is'
 import type { MenuMapperModel } from '@/typings/global'
 import Dict, { ApiProxy } from '@/config'
-import { cloneDeep } from 'lodash-es'
+import { cloneDeep, get, isFunction } from 'lodash-es'
 import { MenuMode } from '@/typings/data'
-import { ref, Ref } from 'vue'
-import { nFileBase64ById } from '@/api'
 import router from '@/router'
 import { dayjs } from 'element-plus'
-import config from '@/config'
+import { useStore } from 'vuex'
+import { FieldItem } from '@/typings/items'
+const store = useStore()
 
 /**
  * about colors
@@ -184,8 +184,42 @@ export function getQuery (key: string | string[]) {
  * 时间转换
  */
 export function parseTime (time: string | number | Date, cFormat?: string) {
-  if (!time) return ''
-  return dayjs(time).format(cFormat || 'YYYY-MM-DD')
+  if (!time) {
+    return ''
+  }
+  if (arguments.length === 0) {
+    return null
+  }
+
+  if ((time + '').length === 10) {
+    time = +time * 1000
+  }
+
+  const format = cFormat || '{y}-{m}-{d} {h}:{i}:{s}'
+  let date
+  if (typeof time === 'object') {
+    date = time
+  } else {
+    date = new Date(parseInt(String(time)))
+  }
+  const formatObj = {
+    y: date.getFullYear(),
+    m: date.getMonth() + 1,
+    d: date.getDate(),
+    h: date.getHours(),
+    i: date.getMinutes(),
+    s: date.getSeconds(),
+    a: date.getDay()
+  } as any
+  const timeStr = format.replace(/{(y|m|d|h|i|s|a)+}/g, (result: any, key: string | number) => {
+    let value = formatObj[key]
+    if (key === 'a') return ['一', '二', '三', '四', '五', '六', '日'][value - 1]
+    if (result.length > 0 && value < 10) {
+      value = '0' + value
+    }
+    return value || 0
+  })
+  return timeStr
 }
 /**
  * 判断数据类型
@@ -497,3 +531,65 @@ export const pxToRem = (px: number | string) => {
   const result: any = isBigScreen ? px : `${Number(px) / 16}rem`
   return result
 }
+
+// 获取字典值
+export function getDictValue (target: any, value: any, valueKey?: string) {
+  value = +value
+  if (!value && !String(value)) return value
+  return store.getters.dictDataOnly(target)?.find((dict: any) => +dict[valueKey || 'id'] === value)?.name || value
+}
+
+// 表格数据转化
+export function transformTableData (fields: FieldItem[], data: any) {
+  const needTransField = fields.filter((field: FieldItem) => {
+    return field.transform
+  })
+  needTransField.forEach((field: FieldItem) => {
+    const { transform, key, unit } = field
+    // 目前就判断下是否为时间、字典
+    let type = ''
+    if (isFunction(transform)) {
+      type = 'function'
+    } else {
+      if (transform.indexOf('x') > -1 || (transform.indexOf('{') > -1 && transform.indexOf('}') > -1)) {
+        type = 'time'
+      }
+      if (transform.indexOf('.') > -1) {
+        type = 'dict'
+      }
+    }
+
+    data.map((e: any) => {
+      const value = e[key]
+      // if (!(String(value))) {
+      //   e[key] = '-'
+      //   return e
+      // }
+      if (value === '' || value == null || value === undefined) {
+        return '-'
+      }
+      switch (type) {
+        case 'time':
+
+          e[key] = parseTime(new Date(get(e, key, '')), transform) + (unit || '')
+          break
+        case 'dict':
+          e['_' + key] = cloneDeep(get(e, key, ''))
+          e[key] = getDictValue(transform, get(e, key, '')) + (unit || '')
+          break
+        case 'function':
+          e[key] = transform(get(e, key, ''), e)
+        default:
+          e[key] = get(e, key, '') + (unit || '')
+          break
+      }
+      if (unit) {
+        e[key] = e[key]
+      }
+      return e
+    })
+  })
+
+  return data
+}
+

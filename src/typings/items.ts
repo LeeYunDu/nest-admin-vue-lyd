@@ -103,6 +103,8 @@ export interface FieldItem extends BaseUiMode {
   data?: any
   inputKey?: string
   dataKey?: string
+  click?: (params: any) => void
+  width?: string
 }
 
 export interface BtnItem extends BaseUiMode {

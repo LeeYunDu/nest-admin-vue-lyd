@@ -1,5 +1,5 @@
 <template>
-  <section class="page-view">
+  <section class="pagination-component">
     <el-pagination
       v-model:current-page="cPage"
       :page-size="params.pageSize || params.offset"
@@ -31,11 +31,13 @@ const cPage = computed({
   set: page => emit('update:pageNun', page)
 })
 
-const onPageCurrentChange = () => emit('pageChange')
+const onPageCurrentChange = value => {
+  emit('pageChange', { params: { pageNum: value } })
+}
 </script>
 
 <style lang="scss" scoped>
-.page-view {
+.pagination-component {
   width: 100%;
   position: relative;
   display: flex;
@@ -49,11 +51,11 @@ const onPageCurrentChange = () => emit('pageChange')
     align-items: center;
 
     .total {
-      position: absolute;
-      left: 0;
-      font-size: 14px;
-      font-weight: 400;
-      color: rgba(0, 0, 0, 0.6);
+      // position: absolute;
+      // left: 0;
+      // font-size: 14px;
+      // font-weight: 400;
+      // color: rgba(0, 0, 0, 0.6);
     }
 
     > button {
@@ -63,27 +65,27 @@ const onPageCurrentChange = () => emit('pageChange')
 
     .el-pager {
       > li {
-        border: 1px solid #dcdcdc;
-        background-color: #fff;
-        color: rgba(0, 0, 0, 0.6);
-        font-weight: normal;
-        font-size: 14px;
-        border-radius: 3px;
+        // border: 1px solid #dcdcdc;
+        // background-color: #fff;
+        // color: rgba(0, 0, 0, 0.6);
+        // font-weight: normal;
+        // font-size: 14px;
+        // border-radius: 3px;
 
         & ~ li {
           margin-left: 5px;
         }
 
         &:not(.disabled).is-active {
-          background-color: #0ab1b6;
-          border: none;
-          color: rgba(255, 255, 255, 0.9);
+          // background-color: #0ab1b6;
+          // border: none;
+          // color: rgba(255, 255, 255, 0.9);
         }
 
         &:not(.disabled):hover {
-          background-color: #0ab1b6;
-          border: none;
-          color: rgba(255, 255, 255, 0.9);
+          // background-color: #0ab1b6;
+          // border: none;
+          // color: rgba(255, 255, 255, 0.9);
         }
       }
     }

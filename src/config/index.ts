@@ -10,6 +10,9 @@ export const ApiProxy = {
   java: {
     // 主应用
     main: VITE_APP_BASE_JAVA_API
+  },
+  node: {
+    main: ''
   }
 }
 

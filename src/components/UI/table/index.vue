@@ -1,5 +1,5 @@
 <template>
-  <section class="table-view">
+  <section class="ui-table">
     <div v-if="$slots.tableHeader" class="table-header">
       <slot name="tableHeader"></slot>
     </div>
@@ -24,8 +24,8 @@
           :column-props="tableProps"
           @clickable="(params) => $emit('clickable', params)"
         >
-          <template #[String(tableProps.slot)]="tableColumnProps">
-            <slot :name="tableProps.slot" v-bind="tableColumnProps"> </slot>
+          <template #[String(tableProps.slotName)]="tableColumnProps">
+            <slot :name="tableProps.slotName" v-bind="tableColumnProps"> </slot>
           </template>
         </TableColumn>
       </template>
@@ -43,8 +43,8 @@
     </el-table>
     <SimplePage
       v-if="showPage"
-      v-bind="$attrs"
-      @page-change="$emit('pageChange')"
+      v-bind="$attrs.options.pagination"
+      @page-change="onPageChange"
     />
   </section>
 </template>
@@ -91,8 +91,8 @@ const attrs = useAttrs()
 // style
 const defaultHeaderStyle = computed(() => {
   return  {
-    height: '36px',
-    color: 'rgba(255, 255, 255, 1)',
+    height: '50px',
+    // color: 'rgba(255, 255, 255, 1)',
     fontWeight: '400',
     fontSize: '16px',
     textAlign: 'center'
@@ -101,7 +101,7 @@ const defaultHeaderStyle = computed(() => {
 
 const defaultCellStyle = {
   height: '44px',
-  color: 'rgba(255, 255, 255, 1)',
+  // color: 'rgba(255, 255, 255, 1)',
   fontWeight: '400',
   fontSize: '14px',
   textAlign: 'center'
@@ -172,6 +172,10 @@ function onTableFilterChange(filter) {
   })
 }
 
+function onPageChange (opts:any){
+  emits('pageChange', opts)
+}
+
 let interval = null
 
 function initScroll() {
@@ -199,11 +203,12 @@ defineExpose({ table })
 </script>
 
 <style lang="scss" scoped>
-.table-view {
+.ui-table {
   width: 100%;
   height: 100%;
-
-  overflow-y: auto;
+  display: flex;
+  flex-direction:column;
+  overflow-y: hidden;
   ::v-deep(.el-table) {
     flex: 1;
     background: transparent;
@@ -224,8 +229,14 @@ defineExpose({ table })
     }
     thead {
       tr {
+        background-color: transparent;
+        background-repeat: no-repeat;
+        background-size: 100%;
         th {
-          color: #fff;
+          font-family: Source Han Sans CN-Regular,Source Han Sans CN;
+          font-weight: 400;
+          color: #020810;
+          background: #f6f8fc;
         }
       }
     }
@@ -233,10 +244,10 @@ defineExpose({ table })
     th.el-table__cell {
       // border: none;
       padding: 0;
-      background:rgba(57, 156, 255, 0.36);
-      font-size: 16px;
+      // background:rgb(147 197 253 / .5);
+      font-size: 14px;
       color: #020810;
-      font-family: 'Alibaba PuHuiTi', 'Alibaba PuHuiTi';
+      font-family: 'PingFang SC', 'PingFang SC';
       border-bottom: 0;
 
       .cell {
@@ -253,12 +264,11 @@ defineExpose({ table })
       td {
         padding: 0;
         // border: none !important;
-        font-size: 16px;
-        color: white;
-        font-family: 'Alibaba PuHuiTi', serif;
+        font-size: 14px;
+        color: #020810;
+        font-family: 'PingFang SC', 'PingFang SC';
         font-weight: 400;
-        line-height: 19px;
-        border-bottom: 0;
+        // border-bottom: 0;
       }
 
       &:hover {
@@ -273,11 +283,6 @@ defineExpose({ table })
       }
     }
 
-    .el-table__row--level-0 {
-      .type-name {
-        color: rgba(0, 242, 242, 1) !important;
-      }
-    }
 
     // 操作按钮样式
     .el-table__row {
@@ -319,13 +324,5 @@ defineExpose({ table })
   }
 }
 
-@media (min-width: 3000px) {
-  .table-view {
-    ::v-deep(.el-table) {
-      .el-table__body-wrapper {
-        margin-top: 25px;
-      }
-    }
-  }
-}
+
 </style>

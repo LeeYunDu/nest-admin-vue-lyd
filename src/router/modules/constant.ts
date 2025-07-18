@@ -26,31 +26,5 @@ export const constantRoutes: Array<any> = [
     component: () => import('@/pages/errorPages/500.vue'),
     meta: { permission: false, showHeader: false }
   },
-  {
-    path: '/template',
-    name: 'Template',
-    component: () => import('@/layouts/router.vue'),
-    meta: { permission: false, title: 'template', showHeader: true, showSide: true },
-    redirect: '/template/list',
-    children: [
-      {
-        path: 'list',
-        name: 'TemplateList',
-        component: () => import('@/pages/template/list.vue'),
-        meta: { permission: false, title: 'list', showHeader: true, showSide: true }
-      },
-      {
-        path: 'add-page',
-        name: 'TemplateAdd',
-        component: () => import('@/pages/template/add.vue'),
-        meta: { permission: false, title: 'add', showHeader: true, showSide: true }
-      },
-      {
-        path: 'detail-page',
-        name: 'TemplateDetail',
-        component: () => import('@/pages/template/detail.vue'),
-        meta: { permission: false, title: 'detail', showHeader: true, showSide: true }
-      }
-    ]
-  },
+
 ]
