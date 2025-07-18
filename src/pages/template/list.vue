@@ -16,6 +16,9 @@
           </template>
         </UiForm>
       </div>
+      <div class="table-menu">
+        <ActionButtons :fields="tableMneuButtons" />
+      </div>
     </section>
     <section class="page-main">
       <div class="table-box">
@@ -43,7 +46,6 @@
       </div>
     </section>
   </div>
-  <!-- <roleSetForm v-model="state.roleShow" :row="state.currentUser" /> -->
 </template>
 
 <script lang="ts" setup>
@@ -54,9 +56,7 @@ import { UiTable } from '@/components/UI/table'
 import { UiForm } from '@/components/UI/form'
 import { useRouter } from 'vue-router'
 import { get } from 'lodash-es'
-import SearchInput from '@/components/search-input/index.vue'
 import ActionButtons from '@/components/action-button/index.vue'
-import { FieldItem } from '@/typings/items'
 import { transformTableData } from '@/utils'
 
 let state = reactive({
@@ -72,10 +72,10 @@ const curParams:any = ref({
   pageSize: 10,
   name:'',
 })
+
 let useTableQueryForm = computed(()=>{
   return tableQueryFormFields
 })
-
 
 function onPageChange (opts:any){
   let { params } = opts
@@ -107,11 +107,19 @@ const formButtons = ref([
     } }
 ])
 
+const tableMneuButtons = ref([
+  {
+    label:'新增',key:'search',icon:'',click:()=>{
+
+    }
+  },
+])
 
 function showBtns (key:string, row:any):boolean {
   const active:any = {
     'detail': true,
     'edit':true,
+    'add':true,
     'delete':get(row, 'y6') == true,
   }
   return active[key]

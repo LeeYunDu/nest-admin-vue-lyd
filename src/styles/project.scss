@@ -64,10 +64,11 @@ body {
   flex-direction: column;
 
   .page-header{
+    border-radius: 4px;
+    padding: 12px 20px;
+    background: #fff;
     .table-query-form{
-      border-radius: 4px;
-      padding: 12px 20px;
-      background: #fff;
+     
     }
     margin-bottom: 12px;
   }
