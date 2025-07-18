@@ -176,7 +176,7 @@ onMounted(async () => {
       background-clip: text;
       font-size: 48px;
       color: transparent;
-      font-family: 'Alimama ShuHeiTi';
+      font-family: 'PingFangSC-Regular';
       font-weight: bold;
       text-shadow: inset 0 0 2px rgba(255, 255, 255, 0.8);
       line-height: 48px;
@@ -197,7 +197,7 @@ onMounted(async () => {
     margin-top: 34px;
     font-size: 24px;
     color: #fff;
-    font-family: 'Alimama ShuHeiTi';
+    font-family: 'PingFangSC-Regular';
     font-weight: bold;
     text-align: center;
     line-height: 28px;
@@ -210,7 +210,7 @@ onMounted(async () => {
       height: 54px !important;
       .el-form-item__label {
         font-size: 16px !important;
-        font-family: PingFangSC-Medium, PingFang SC;
+        font-family: PingFangSC-Regular;
         font-weight: 600;
       }
       .el-form-item__content {

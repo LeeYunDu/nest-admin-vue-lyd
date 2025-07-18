@@ -58,7 +58,7 @@ function onClick() {
     padding-left: 26px;
     .title {
       font-size: 24px;
-      font-family: Source Han Sans CN-Bold, Source Han Sans CN;
+      font-family: PingFang SC;
       font-weight: bold;
       color: #FFFFFF;
       line-height: 28px;

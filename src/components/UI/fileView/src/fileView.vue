@@ -465,7 +465,7 @@ export default defineComponent({
           position: relative;
           cursor: pointer;
           font-size: 14px;
-          font-family: Source Han Sans CN-Regular, Source Han Sans CN;
+          font-family: PingFang SC;
           font-weight: 400;
           color: #FFFFFF;
           line-height: 24px;
