@@ -29,21 +29,27 @@ export const constantRoutes: Array<any> = [
   {
     path: '/template',
     name: 'Template',
-    component: () => import('@/pages/template/index.vue'),
-    meta: { permission: false, title: 'template' },
-    redirect: '/template/table',
+    component: () => import('@/layouts/router.vue'),
+    meta: { permission: false, title: 'template', showHeader: true, showSide: true },
+    redirect: '/template/list',
     children: [
       {
-        path: 'form',
-        name: 'TemplateForm',
-        component: () => import('@/pages/template/form.vue'),
-        meta: { permission: false, title: 'form' }
+        path: 'list',
+        name: 'TemplateList',
+        component: () => import('@/pages/template/list.vue'),
+        meta: { permission: false, title: 'list', showHeader: true, showSide: true }
       },
       {
-        path: 'table',
-        name: 'TemplateTable',
-        component: () => import('@/pages/template/table.vue'),
-        meta: { permission: false, title: 'table' }
+        path: 'add-page',
+        name: 'TemplateAdd',
+        component: () => import('@/pages/template/add.vue'),
+        meta: { permission: false, title: 'add', showHeader: true, showSide: true }
+      },
+      {
+        path: 'detail-page',
+        name: 'TemplateDetail',
+        component: () => import('@/pages/template/detail.vue'),
+        meta: { permission: false, title: 'detail', showHeader: true, showSide: true }
       }
     ]
   },

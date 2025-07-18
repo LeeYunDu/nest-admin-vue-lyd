@@ -3,7 +3,7 @@
     <div class="content">
       <div class="login-title">{{ loginTitle }}</div>
       <section class="login-form">
-        <div class="cont-title">登录系统</div>
+        <div class="cont-title">管理平台</div>
         <el-form
           ref="formRef"
           :model="state.params"
@@ -147,17 +147,18 @@ onMounted(async () => {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 100vw;
-  height: 100vh;
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  background-image: imgPathScss('login/bg.png');
   background-position: center;
   background-repeat: no-repeat;
-  background-size: cover;
-  background-image: imgPathScss('login/bg.png');
+  background-size: 100% 100%;
   z-index: 111;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
 
   .title {
     width: 716px;

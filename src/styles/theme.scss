@@ -1,15 +1,13 @@
 @forward './theme/primary' as primary-*;
 @use './theme/title.scss';
-
-
 $colortitle:title.$extra;
 /** theme color */
-$primary-color-weight: #9ECCEE;
-$primary-color-light: #9ECCEE;
+$primary-color-weight: #FFC000;
+$primary-color-light: #FFC000;
 /** base color */
 $white: #fff;
 $black: #000;
-$mark: #9ECCEE;
+$mark: #FFC000;
 $color-f5: #f5f5f5;
 $color-3: #333;
 $color-4: #444;
@@ -32,8 +30,8 @@ $color-01: rgba(1, 255, 234, 0.20);
 
 /** primary page color */
 $primary-bg-body: #F2F2F6;
-$primary-bg-header: white;
-$primary-bg-aside: white;
+$primary-bg-header: rgba(255,255,255,0.17);
+$primary-bg-aside: none;
 
 /** primary other color */
 $primary-color-header: #FFFFFF;
@@ -87,7 +85,7 @@ $border-radius-large: 8px;
 
 /** layout */
 $page-aside-width: 220px;
-$page-header-height: 80px;
+$page-header-height: 64px;
 $page-breadcrumb-height: 52px;
 $page-side-width: 220px;
 $page-main-center-width: 1540px;
@@ -95,6 +93,16 @@ $page-content-padding: $padding-size-middle;
 $page-layout-padding: 16px;
 $home-search-width: 700px;
 $theme-box-radius: 6px;
+
+
+$font-size-12: var(--size-12,12px);
+$font-size-14: var(--size-14,14px);
+$font-size-16: var(--size-16,16px);
+$font-size-18: var(--size-18,18px);
+$font-size-20: var(--size-20,20px);
+$font-size-22: var(--size-22,22px);
+$font-size-24: var(--size-24,24px);
+$font-size-26: var(--size-24,26px);
 
 /** box */
 $box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
@@ -123,6 +131,12 @@ $title: (
   -webkit-line-clamp: $number;
 }
 
+$node-path: '/node-szzt';
+$file-id:'2164';
+@function metaFilePathScss($fileName) {
+  @return url(#{$node-path}/file/download/#{$file-id}/#{$fileName});
+}
+
 @function imgPathScss($path) {
-  @return url('~/static/images/#{$path}');
+  @return url('@static/images/#{$path}');
 }

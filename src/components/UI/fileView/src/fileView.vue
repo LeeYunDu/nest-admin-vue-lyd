@@ -81,16 +81,16 @@
           >
             <p>
               <span class="icon_box icon_file">
-                <img src="static/images/app/icon_pdf.png">
+                <img src="@static/images/app/icon_pdf.png">
               </span>
               <span>{{ item[nameKey] || '' }}</span>
             </p>
             <p>
               <span v-if="download" class="icon_box" @click.stop="goDownLoadFile(item,index)">
-                <img class="icon" src="static/images/common/icon-down.png">
+                <img class="icon" src="@static/images/common/icon-down.png">
               </span>
               <span v-if="remove" class="icon_box" @click.stop="delItem(item,index)">
-                <img class="icon" src="static/images/common/icon-delete.png">
+                <img class="icon" src="@static/images/common/icon-delete.png">
 
               </span>
             </p>

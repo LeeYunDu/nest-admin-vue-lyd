@@ -33,7 +33,7 @@ export default () => {
     base: './',
     build: buildConf(),
     server: {
-      port: 4050,
+      port: 4500,
       host: true,
       proxy: {
         // api proxy
@@ -58,7 +58,10 @@ export default () => {
     resolve: {
       alias: [
         { find: /^~/, replacement: '' },
-        { find: '@', replacement: path.resolve(__dirname, 'src') }
+        { find: '@', replacement: path.resolve(__dirname, 'src') },
+        { find: '@static', replacement: path.resolve(__dirname, 'public/static') },
+        { find: 'static', replacement: path.resolve(__dirname, 'public/static') },
+
       ]
     },
     css: {

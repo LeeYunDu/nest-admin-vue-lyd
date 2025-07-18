@@ -48,11 +48,17 @@ import {
   ElTimelineItem,
   ElTooltip,
   ElCheckbox,
-  ElCheckboxGroup
+  ElCheckboxGroup,
+  ElDropdown,
+  ElDropdownMenu,
+  ElDropdownItem
 } from 'element-plus'
 
 export default {
   install (app: App) {
+    app.component(ElDropdown.name, ElDropdown)
+    app.component(ElDropdownMenu.name, ElDropdownMenu)
+    app.component(ElDropdownItem.name, ElDropdownItem)
     app.component(ElCheckbox.name, ElCheckbox)
     app.component(ElCheckboxGroup.name, ElCheckboxGroup)
     app.component(ElConfigProvider.name, ElConfigProvider)

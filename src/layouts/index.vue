@@ -1,6 +1,9 @@
 <template>
   <section
     :class="['app-layout', { showHeader: showHeader, showSide: showSide }]"
+    :style="{
+      backgroundImage: `url(${banner})`
+    }"
   >
     <header v-if="showHeader">
       <ViewHeader />
@@ -15,9 +18,6 @@
         <ViewMain />
       </section>
     </main>
-    <template v-if="!!banner">
-      <img class="top-bg" :src="banner" />
-    </template>
   </section>
 </template>
 <script lang="ts" setup>
@@ -29,6 +29,7 @@ import ViewMain from './components/main.vue'
 import { RouteLocationMatched, useRoute } from 'vue-router'
 import { MenuMode } from '@/typings/data'
 import { get } from 'lodash-es'
+import { imgPath } from '@/utils'
 
 // hooks
 const route = useRoute()
@@ -36,6 +37,7 @@ const route = useRoute()
 const showHeader = computed(() => {
   return get(route.meta, 'showHeader', false)
 })
+
 const { showSide } = useCheckedMenu()
 
 const matched = computed<RouteLocationMatched[]>(() => route.matched || [])
@@ -43,9 +45,13 @@ const matched = computed<RouteLocationMatched[]>(() => route.matched || [])
 const metaMenu = computed<MenuMode>(() => (route.meta?.data || {}) as MenuMode)
 
 const banner = computed<string>(() => {
-  const cp = metaMenu.value.picture
-  const cur = cp ? JSON.parse(cp) : getMachedPicture()
-  return cur[0]?.url || ''
+  let showBanner = metaMenu.value.showBanner??true
+  if(showBanner){
+    const cp = metaMenu.value.picture
+    const cur = cp ? JSON.parse(cp) : getMachedPicture()
+    return cur[0]?.url || imgPath('layout/banner2.png')
+  }
+  return ''
 })
 
 // fns
@@ -68,10 +74,10 @@ function getMachedPicture() {
   height: 100vh;
   display: flex;
   flex-direction: column;
-  background-size: 100%;
+  background-size: 100% ;
   background-repeat: no-repeat;
   background-position: top;
-  background-color: #f6f7f9;
+  background-color: #F6F7F9;
   &.showHeader {
     header {
       height: $page-header-height;
@@ -85,7 +91,7 @@ function getMachedPicture() {
   }
 
   main {
-    margin: 0px;
+    margin: 20px 24px 24px 24px;
     position: relative;
     display: flex;
     overflow: hidden;
@@ -93,7 +99,7 @@ function getMachedPicture() {
     .aside {
       width: $page-aside-width;
       margin-right: 20px;
-      background: #ffffff;
+      background: #FFFFFF;
       border-radius: 4px 4px 4px 4px;
       overflow: hidden;
       padding: 6px 10px;

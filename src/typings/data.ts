@@ -36,4 +36,5 @@ export interface MenuMode {
   redirect?: string
   _ids?: Array<string | number>
   _routes?: MenuMode[]
+  showBanner?: boolean
 }

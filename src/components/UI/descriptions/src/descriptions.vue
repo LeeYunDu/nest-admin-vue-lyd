@@ -19,7 +19,7 @@
               {{ field.label }}
               <img
                 class="icon-update"
-                src="static/images/audit/icon-update.png"
+                src="@static/images/audit/icon-update.png"
                 @click="onShowDetail"
               >
             </div>

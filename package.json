@@ -5,6 +5,7 @@
     "build:test": "cross-env VITE_BUILD_ENV=test vite build && node dev.js",
     "build:preview": "cross-env VITE_BUILD_ENV=test vite build ",
     "build:prod": "cross-env VITE_BUILD_ENV=production vite build",
+    "build:zip": "del /f /q dist.zip  && cross-env VITE_BUILD_ENV=production vite build && 7z a -tzip -r dist.zip ./dist/*",
     "lint": "eslint --ext .ts,vue src/** --no-error-on-unmatched-pattern --quiet",
     "lint:fix": "eslint --ext .ts,vue src/** --no-error-on-unmatched-pattern --fix"
   },

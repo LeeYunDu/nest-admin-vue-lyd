@@ -13,11 +13,11 @@ const routes: Array<RouteRecordRaw> = [
   ...bussinessRoutes,
   {
     path: '/',
-    redirect: '/home'
+    redirect: '/template/list'
   },
   {
     path: '',
-    redirect: '/home',
+    redirect: '/template/list',
     component: Layout,
     children: []
   },

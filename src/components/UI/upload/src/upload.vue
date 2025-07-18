@@ -67,7 +67,7 @@
               class="up_btn"
               :loading="isUploading"
             >
-              <img src="static/images/app/icon_upload.png" class="icon_up">
+              <img src="@static/images/app/icon_upload.png" class="icon_up">
               <span>点击上传</span>
             </el-button>
           </slot>
@@ -75,7 +75,7 @@
 
         <!-- 上传提示 -->
         <div v-if="isShowTip" class="upload_tip flex f-aic" style="margin-left:10px">
-          <img src="static/images/common/icon-tip.png" class="icon_tip" alt="">
+          <img src="@static/images/common/icon-tip.png" class="icon_tip" alt="">
           <slot name="tips">
             <p v-if="tips" v-html="tips"></p>
             <p v-else>
@@ -318,7 +318,7 @@ export default defineComponent({
             return false
           })
           if (!isTypeOk) {
-            ElMessage.error(`文件格式不正确, 请上传正确格式的文件!`)
+            ElMessage.error('文件格式不正确, 请上传正确格式的文件!')
             clearUploadStatus()
             return false
           }
